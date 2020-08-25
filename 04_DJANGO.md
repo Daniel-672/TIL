@@ -140,7 +140,7 @@ urlpatterns = [
 
 
 
-### - 모델에서 사진 저장 경로 바꾸기
+### - 모델에서 사진 저장 경로 바꾸기 (models.py)
 
 ```python
 from django.db import models
@@ -174,5 +174,34 @@ class Users(models.Model):
     guardianBasicMsg = models.CharField(blank=True, max_length=100, verbose_name="보호자기본메세지")
     def __str__(self):
         return  f"[{self.__class__.__name__}] userEmail={self.userEmail}"
+```
+
+
+
+### - views.py에서 html로 데이터 전달하기
+
+#### (1) 함수에서 context를 만들고 던지면
+
+```python
+def index(request) :
+    context = None
+    if 'user' in request.session:
+        context = {'loginyn':True, 'nickname':'%s' % request.session['nickname']}
+        # return redirect('onlymember')
+        return render(request, 'index.html', context)
+    else:
+        context = {'loginyn': False}
+        return render(request, 'index.html', context)
+```
+
+#### (2) html에서 받아서 사용
+
+```html
+{% if loginyn  %}
+                <a class="navbar-brand js-scroll-trigger-left" href="{% url 'logout' %}">logout</a>
+                {{nickname}}님 안녕하세요.
+{% else %}
+                <a class="navbar-brand js-scroll-trigger-left" href="{% url 'login' %}">login</a>
+{% endif %}
 ```
 
