@@ -205,4 +205,40 @@ def index(request) :
 {% endif %}
 ```
 
-### - 
+### 
+
+### - 화면 특정 위치로 이동1 (redirect)
+
+```html
+<!-- HTML에 이동할 위치 잡아 주기 id값도 동작 -->
+<a name="board"></a>
+```
+
+```python
+# redirect의 경우 resolve_url을 이용해서 문자열을 맞추어 설정
+# return redirect('board')
+# return redirect('{}#move_{}'.format(resolve_url('board'), 'board'))
+return redirect('{}#{}'.format(resolve_url('board'), 'board'))
+```
+
+### - 화면 특정 위치로 이동2 (render)
+
+```javascript
+<!-- render는 javascript로 처리 -->
+{% block javascript %}
+$(document).ready(function () {
+$('html, body').animate({
+scrollTop: $('#board').offset().top
+}, 'slow');
+});
+```
+
+
+
+### - SQLite에서 3개 테이블 PK - FK로 연결시 aggregate하기
+
+``` python
+#article - comment - comment2 (테이블 간 PK->FK구성 )
+articles = Article.objects.annotate(cmtcnt=Count("comment__id", distinct=True) + Count("comment__comment2__id", distinct=True)).all()
+```
+
