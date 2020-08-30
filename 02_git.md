@@ -148,7 +148,7 @@
 
 ## 5. git tip
 
-### (1) github와 초기 동기화를 위한 명령어
+### (1) github와 초기 clone 동기화를 위한 명령어 (git 파일다운과 비슷)
 
 ```bash
 $ git clone https://github.com/zzzz/TIL.git	# 최초 repository 동기화
@@ -156,5 +156,3 @@ $ git clone https://github.com/zzzz/TIL.git	# 최초 repository 동기화
 $ git config --global user.email "zzzz@hotmail.com"
 $ git config --global user.name "zzzz"
 ```
-
-### (2)

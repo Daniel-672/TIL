@@ -46,6 +46,8 @@ c:\python_venv\djangovenv\Script>activate
 
 
 
+
+
 ## - 프로젝트 초기 설정의 예
 
 ### 1. 언어 및 timezone 설정(settings.py)
@@ -140,7 +142,9 @@ urlpatterns = [
 
 
 
-### - 모델에서 사진 저장 경로 바꾸기 (models.py)
+
+
+## - 모델에서 사진 저장 경로 바꾸기 (models.py)
 
 ```python
 from django.db import models
@@ -178,9 +182,11 @@ class Users(models.Model):
 
 
 
-### - views.py에서 html로 데이터 전달하기
 
-#### (1) 함수에서 context를 만들고 던지면
+
+## - views.py에서 html로 데이터 전달하기
+
+#### - 함수에서 context를 만들고 던지면
 
 ```python
 def index(request) :
@@ -205,9 +211,11 @@ def index(request) :
 {% endif %}
 ```
 
-### 
 
-### - 화면 특정 위치로 이동1 (redirect)
+
+
+
+## - 화면 특정 위치로 이동1 (redirect)
 
 ```html
 <!-- HTML에 이동할 위치 잡아 주기 id값도 동작 -->
@@ -221,7 +229,11 @@ def index(request) :
 return redirect('{}#{}'.format(resolve_url('board'), 'board'))
 ```
 
-### - 화면 특정 위치로 이동2 (render)
+
+
+
+
+## - 화면 특정 위치로 이동2 (render)
 
 ```javascript
 <!-- render는 javascript로 처리 -->
@@ -235,10 +247,36 @@ scrollTop: $('#board').offset().top
 
 
 
-### - SQLite에서 3개 테이블 PK - FK로 연결시 aggregate하기
+
+
+## - SQLite에서 3개 테이블 PK - FK로 연결시 aggregate하기
 
 ``` python
-#article - comment - comment2 (테이블 간 PK->FK구성 )
+#article - comment - comment2 (테이블 간 PK->FK구성 이건 키 기준으로 aggregate)
 articles = Article.objects.annotate(cmtcnt=Count("comment__id", distinct=True) + Count("comment__comment2__id", distinct=True)).all()
+```
+
+``` python
+#article - comment - comment2 (테이블 간 PK->FK구성 이건 스칼라 쿼리 결과값 한줄만)
+article3 = Article.objects.filter(id=pk).aggregate(cmtcnt=Count("comment__id", distinct=True) + Count("comment__comment2__id", distinct=True))
+```
+
+
+
+## - SQLite DBshell
+
+``` python
+# SQL로 접속
+(djangovenv) C:\Users\Daniel\fordisproject>python manage.py dbshell
+# table 리스트, Drop, select 실행
+.tables
+#참고자료
+#http://pythonstudy.xyz/python/article/309-DB-%EC%84%A4%EC%A0%95%EA%B3%BC-Migration
+#https://wikidocs.net/9926 <- 전제적으로 잘 정리 됨
+```
+
+``` python
+#article - comment - comment2 (테이블 간 PK->FK구성 이건 스칼라 쿼리 결과값 한줄만)
+article3 = Article.objects.filter(id=pk).aggregate(cmtcnt=Count("comment__id", distinct=True) + Count("comment__comment2__id", distinct=True))
 ```
 
