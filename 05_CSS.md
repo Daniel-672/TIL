@@ -24,3 +24,31 @@ for (i = 0; i < acc.length; i++) {
 </script>
 ```
 
+
+
+### - 이미지 + text (HTML + CSS)
+
+```html
+    <!-- 1라인답글의 작성자 정보 -->
+    <div class="c_article">
+      <div>
+          <a href="#"><img class="image_section" width="100" src="{{ comment.cwriter.photo.url }}" alt="" /></a>
+      </div>
+      <div>
+          <div style="margin-bottom:2px; display: inline-block"><b>[{{ comment.cwriter.nickName }}]님</b><span style="color:red">{% if article.awriter == comment.cwriter %}(작성자){% endif %}</span></div>
+          <div>{{ comment.updated_at }}</div>
+      </div>
+    </div>
+```
+
+```html
+    .c_article {
+      width: auto;
+      display: flex;
+      align-items: center
+    }
+```
+
+
+
+### - 
