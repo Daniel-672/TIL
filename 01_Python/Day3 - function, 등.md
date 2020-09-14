@@ -1,8 +1,8 @@
 
 
-# Day2
+# Day3
 
-> print, for문, input, time 등
+> function, 등
 
 ### - 교육내용
 
@@ -256,6 +256,46 @@ def calcsum(n):
 
 for x in range(1,11):
     print('sum value from', '1 to', x, 'is', calcsum(x))
+
+    
+def normalfn(p1, p2, p3) :
+    print(p1)
+    print(p2)
+    print(p3)
+    print("-" * 10)
+
+normalfn(10,20,30) # 포지션 아규먼트
+normalfn(p3=10,p1=20,p2=30) # 키워드 아규먼트
+#normalfn("abc", "def")
+#normalfn()
+
+# 기본값(디폴트) 매개변수
+def defaultfn1(p1=10, p2="abc", p3=True) :
+    print(p1)
+    print(p2)
+    print(p3)
+    print("=" * 10)
+
+defaultfn1(10,20,30)
+defaultfn1("abc", "xyz")
+defaultfn1(p2="가", p1="xyz", p3="P")
+defaultfn1()
+
+# 기본값(디폴트) 매개변수
+# def defaultfn2(p1, p2="abc", p3) :
+#     pass
+
+def defaultfn2(p1, p2="abc", p3=True) :
+    print(p1)
+    print(p2)
+    print(p3)
+    print("=" * 10)
+
+defaultfn2(10,20,30)
+defaultfn2("abc", "xyz")
+defaultfn2(p2="가", p1="xyz")
+defaultfn2("aa")
+defaultfn2()
 
 ```
 
