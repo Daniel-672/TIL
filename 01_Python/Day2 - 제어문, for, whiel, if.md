@@ -2,7 +2,7 @@
 
 # Day2
 
-> print, for문, input, time 등
+> print, for문, input, time
 
 ### - 교육내용
 

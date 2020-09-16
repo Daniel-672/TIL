@@ -2,7 +2,7 @@
 
 # Day4
 
-> pack_unpack, 인자, 시퀀스, 리스트, 등
+> pack_unpack, 인자, 시퀀스, 리스트
 
 ### - 교육내용
 

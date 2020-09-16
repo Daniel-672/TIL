@@ -2,7 +2,7 @@
 
 # Day3
 
-> function, 등
+> function,
 
 ### - 교육내용
 
