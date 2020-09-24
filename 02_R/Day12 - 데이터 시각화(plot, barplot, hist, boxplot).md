@@ -195,6 +195,71 @@ gray.colors(10)
 ### - 실습
 
 ```R
+# 마리아DB 연결
+library(rJava)
+library(RJDBC)
+library(DBI)
+
+getwd() #"C:/Rexam"
+drv <- JDBC(driverClass = "org.mariadb.jdbc.Driver" ,"mariadb-java-client-2.6.2.jar")
+conn <- dbConnect(drv, 'jdbc:mariadb://127.0.0.1:3303/work', 'scott', 'tiger')
+
+# fonts load
+library(showtext)
+showtext_auto() 
+font_add(family = "cat", regular = "fonts/HoonWhitecatR.ttf")
+font_add(family = "dog", regular = "fonts/THEdog.ttf")
+font_add(family = "maple", regular = "fonts/MaplestoryBold.ttf")
+
+#문제1
+# 1.테이터 정리
+productlog <- dbReadTable(conn, 'productlog ')
+str(productlog)
+# factor.pid <- table(productlog$pid) table로 한방에 아니면 factor -> summary 
+factor.pid <- factor(productlog$pid)
+summary.factor.pid <- summary(factor.pid)
+
+# 2.차트 그리기
+barplot(summary.factor.pid, main="세로바 그래프 실습", xlab="상품ID", ylab="클릭수", ylim=c(0, 100), col=terrain.colors(10))
+
+# 3.이미지저장
+dev.copy(png, 'clicklog1.png', 700, 400)
+dev.off()
+
+
+#문제2
+# 1.테이터 정리
+productlog <- dbReadTable(conn, 'productlog ')
+productlog$timeBand <- substr(productlog$clicktime, 9, 10)
+factor.timeBand <- factor(productlog$timeBand)
+summary.factor.timeBand <- summary(factor.timeBand)
+str(summary.factor.timeBand)
+names(summary.factor.timeBand) <- paste(c(0:18), c(1:19), sep=' ~ ')[c(-7,-8)]
+
+# 2.차트 그리기
+pie(summary.factor.timeBand, main="파이그래프 실습", col=rainbow(17))
+
+# 3.이미지저장
+dev.copy(png, 'clicklog2.png', 700, 500)
+dev.off()
+
+
+#문제3
+# 1.테이터 정리
+record <- read.table("data/성적.txt", header=TRUE)
+sub.record <- record[,3:5]
+
+# 2.차트 그리기
+boxplot(sub.record, col=rainbow(3), axes=F)
+axis(1, at=1:3, lab=names(sub.record), family="maple") 
+axis(2, at=seq(2, 10, 2), family="maple")
+title("과목별 성적 분포", family="maple", cex.main=1.5, col.main="orange")
+box()
+
+# 3.이미지저장
+dev.copy(png, 'clicklog3.png')
+dev.off()
+
 
 ```
 
