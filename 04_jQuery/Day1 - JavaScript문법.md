@@ -1,8 +1,8 @@
 
 
-# Day2
+# Day1
 
-> BOM객체
+> JavaScript 문법
 
 ### - 교육내용
 

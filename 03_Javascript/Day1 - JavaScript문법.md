@@ -2,7 +2,7 @@
 
 # Day1
 
-> JavaScript기초
+> JavaScript 문법
 
 ### - 교육내용
 
