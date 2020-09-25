@@ -1,6 +1,6 @@
 ## Javascript tip
 
-### - 이미지 선택시 보여주기
+### - 이미지 선택 시 화면에 노출 (다시 선택 시 변경)
 
  - html에 위치 지정
 
@@ -31,7 +31,7 @@
 
 
 
-### - 위경도 찾아서 주소로 변경
+### - 윈도우 객체로 위경도 찾아서 kakao api로 주소로 변경
 
 ```javascript
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=카카오API키&libraries=services"></script>
@@ -85,4 +85,4 @@ geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
 
 
 
-### - 이미지
+### - 
