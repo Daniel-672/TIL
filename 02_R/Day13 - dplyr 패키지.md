@@ -230,7 +230,7 @@ library(dplyr)
 
 
 # [문제0] comm 컬럼값이 0 보다 적으면 NA 값으로 변경한다.
-emp$comm[which(emp$comm < 0)] <- 'NA'
+emp$comm[which(emp$comm < 0)] <- na
 emp$comm
 
 
@@ -252,7 +252,7 @@ emp %>% select(ename, sal)
 
 # [문제5] 업무별 직원수를 출력한다.
 emp %>% group_by(job) %>% summarise(n = n()) 
-
+emp %>% count(job)
 
 # [문제6] 월급이 1000 이상이고 3000이하인 사원들의 이름, 월급, 부서번호를 출력한다.
 emp %>% filter(sal >= 1000 & sal <= 3000) %>% select(ename, sal, deptno)
@@ -282,6 +282,8 @@ emp %>% arrange(desc(sal)) %>% head(1)
 empnew <- emp %>% mutate(salary = sal, commrate = comm) %>% select(-sal, -comm)
 empnew
 
+emp %>% rename(emp, sal = salary)
+
 
 # [문제13] 가장 많은 인원이 일하고 있는 부서 번호를 출력한다.
 emp %>% group_by(deptno) %>% summarise(n = n()) %>% 
@@ -294,6 +296,114 @@ emp %>% mutate(enamelength = nchar(ename)) %>% arrange(enamelength) %>% select(e
 
 # [문제15] 커미션이 정해진 직원들의 명수를 출력한다.
 emp %>% filter(comm != 'NA') %>% tally()   
+emp %>% filter(!is.na(comm)) %>% tally()
+
+
+# install.packages("ggplot2")
+str(ggplot2::mpg)
+
+
+# 1
+mpg <- as.data.frame(ggplot2::mpg)
+
+# 1-1
+str(mpg)
+
+# 1-2
+dim(mpg)
+
+# 1-3
+head(mpg, 10)
+
+# 1-4
+tail(mpg, 10)
+
+# 1-5
+View(mpg)
+
+# 1-6
+summary(mpg)
+
+# 1-7
+mpg %>% count(manufacturer)
+
+# 1-8
+mpg %>% count(manufacturer, model)
+
+
+# 2
+# 2-1
+mpgCopy <- rename(mpg, city = cty, highway = hwy)
+str(mpgCopy)
+
+# 2-2
+head(mpgCopy)
+
+
+# 3
+# 3-1
+midwest <- as.data.frame(ggplot2::midwest)
+str(midwest); head(midwest); summary(midwest)
+
+# 3-2
+midwestCopy <- rename(midwest, total = poptotal, asian = popasian)
+str(midwestCopy)
+
+# 3-3
+# 지역별 아시아인 평균 추가 : perAsian
+midwestCopy <- midwestCopy %>% mutate(perAsian = asian / total * 100)
+midwestCopy %>% select(total, asian, perAsian) %>% head
+
+# 3-4
+# 전체 아시아인 평균 추가 : TAvgPerAsian
+midwestCopy <- midwestCopy %>% mutate(TAvgPerAsian = sum(asian) / sum(total) * 100)
+midwestCopy %>% select(total, asian, perAsian, TAvgPerAsian) %>% head
+# 판별식 추가
+midwestCopy <- midwestCopy %>% mutate(sizeAsian = ifelse(perAsian > TAvgPerAsian, "large", "small"))
+midwestCopy %>% 
+  filter(sizeAsian == 'large') %>% 
+  select(total, asian, perAsian, TAvgPerAsian, sizeAsian) %>% head
+midwestCopy %>% 
+  filter(sizeAsian == 'small') %>% 
+  select(total, asian, perAsian, TAvgPerAsian, sizeAsian) %>% head
+
+
+# 4
+mpg <- as.data.frame(ggplot2::mpg)
+# 4-1
+mpg %>% mutate(catDispl = ifelse(displ <= 4, "배기량4이하", "배기량5이상")) %>% 
+  group_by(catDispl) %>% summarise(mean_hwy = mean(hwy))
+
+# 4-2
+mpg %>% filter(manufacturer %in% c('audi', 'toyota')) %>% 
+  group_by(manufacturer) %>% summarise(mean_cty = mean(cty))
+
+# 4-3
+mpg %>% filter(manufacturer %in% c('chevrolet', 'ford', 'honda')) %>% 
+  summarise(mean_hwy_3m = mean(hwy))
+
+
+#5
+mpg <- as.data.frame(ggplot2::mpg)
+# 5-1
+mpgCopy <- mpg %>% select(class, cty)
+sample_n(mpgCopy, 5)
+
+# 5-2
+mpgCopy %>% filter(class %in% c('suv', 'compact')) %>%
+  group_by(class) %>% summarise(mean_cty_2class = mean(cty))
+
+
+# 6
+# audi 모델 중 hwy연비가 좋은 모델
+mpg <- as.data.frame(ggplot2::mpg)
+mpg %>% filter(manufacturer == 'audi') %>%
+  group_by(model) %>% summarise(mean_hwy_audi = mean(hwy)) %>%
+  arrange(desc(mean_hwy_audi))
+
+# audi중 hwy연비가 좋은 자동차의 데이터
+mpg %>% filter(manufacturer == 'audi') %>%
+  arrange(desc(hwy)) %>% head(5)
 
 
 ```
