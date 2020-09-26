@@ -2,7 +2,7 @@
 
 # Day13
 
-> dplyr 패키지
+> dplyr 패키지, 결측, 이상치 처리
 
 ### - 교육내용
 
@@ -206,6 +206,129 @@ mpg %>%
   arrange(desc(mean_tot)) %>%          # 내림차순 정렬
   head(5) 
 
+
+one <- data.frame(x = c(1:1000000), y = c(1:1000000))
+two <- data.frame(x = c(1:1000000), y = c(1:1000000))
+                  
+system.time(rbind(one, two))
+system.time(bind_rows(one, two))
+
+# 가로로 합치기
+# 중간고사 데이터 생성
+test1 <- data.frame(id = c(1, 2, 3, 4, 5, 6),  
+                    midterm = c(60, 80, 70, 90, 85, 100))
+# 기말고사 데이터 생성
+test2 <- data.frame(id = c(1, 5, 3, 4, 2, 7),  
+                    final = c(70, 80, 65, 95, 83, 0))
+
+# id 기준으로 합치기
+total <- full_join(test1, test2, by = "id")  # id 기준으로 합쳐 total에 할당
+# 다른 데이터 활용해 변수 추가하기
+# 반별 담임교사 명단 생성
+name <- data.frame(class = c(1, 2, 3, 4, 5), teacher = c("kim", "lee", "park", "choi", "jung"))
+
+# class 기준 합치기
+exam_new <- left_join(exam, name, by = "class")
+
+# 세로로 합치기
+# 학생 1~5번 시험 데이터 생성
+group_a <- data.frame(id = c(1, 2, 3, 4, 5),  test = c(60, 80, 70, 90, 85))
+# 학생 6~10번 시험 데이터 생성
+group_b <- data.frame(id = c(6, 7, 8, 9, 10),  test = c(70, 83, 65, 95, 80))
+#세로로 합치기
+group_all <- bind_rows(group_a, group_b)  # 데이터 합쳐서 group_all에 할당
+
+
+# 데이터 정제 : 결측치(NA)와 이상치 처리
+
+df <- data.frame(sex = c("M", "F", NA, "M", "F"), 
+                 score = c(5, 4, 3, 4, NA))
+
+# 결측치 확인하기
+is.na(df)         # 결측치 확인
+table(is.na(df))  # 결측치 빈도 출력
+# 변수별로 결측치 확인하기
+table(is.na(df$sex))    # sex 결측치 빈도 출력
+table(is.na(df$score))  # score 결측치 빈도 출력
+# 결측치 포함된 상태로 분석
+mean(df$score)  # 평균 산출
+sum(df$score)   # 합계 산출
+# 결측치 있는 행 제거하기
+library(dplyr) # dplyr 패키지 로드
+df %>% filter(is.na(score))   # score가 NA인 데이터만 출력
+df %>% filter(!is.na(score))  # score 결측치 제거
+# 결측치 제외한 데이터로 분석하기
+df_nomiss <- df %>% filter(!is.na(score))  # score 결측치 제거
+mean(df_nomiss$score)                      # score 평균 산출
+sum(df_nomiss$score)                       # score 합계 산출
+# 여러 변수 동시에 결측치 없는 데이터 추출하기
+# score, sex 결측치 제외
+df_nomiss <- df %>% filter(!is.na(score) & !is.na(sex))
+df_nomiss  
+# 결측치가 하나라도 있으면 제거하기
+df_nomiss2 <- na.omit(df)  # 모든 변수에 결측치 없는 데이터 추출
+
+#분석에 필요한 데이터까지 손실 될 가능성 유의
+# 함수의 결측치 제외 기능 이용하기 - na.rm = T
+mean(df$score, na.rm = T)  # 결측치 제외하고 평균 산출
+sum(df$score, na.rm = T)   # 결측치 제외하고 합계 산출
+#summarise()에서 na.rm = T사용하기
+
+# 결측치 생성
+exam <- read.csv("data/csv_exam.csv")            # 데이터 불러오기
+table(is.na(exam))
+exam[c(3, 8, 15), "math"] <- NA             # 3, 8, 15행의 math에 NA 할당
+#평균 구하기
+exam %>% summarise(mean_math = mean(math))             # 평균 산출
+exam %>% summarise(mean_math = mean(math, na.rm = T))  # 결측치 제외하고 평균 산출
+# 다른 함수들에 적용
+exam %>% summarise(mean_math = mean(math, na.rm = T),      # 평균 산출
+                   sum_math = sum(math, na.rm = T),        # 합계 산출
+                   median_math = median(math, na.rm = T))  # 중앙값 산출
+boxplot(exam$math)
+mean(exam$math, na.rm = T)  # 결측치 제외하고 math 평균 산출
+# 평균으로 대체하기
+exam$math <- ifelse(is.na(exam$math), 55, exam$math)  # math가 NA면 55로 대체
+table(is.na(exam$math))                               # 결측치 빈도표 생성
+mean(exam$math)  # math 평균 산출
+
+# 이상치 포함된 데이터 생성 - sex 3, score 6
+outlier <- data.frame(sex = c(1, 2, 1, 3, 2, 1),  score = c(5, 4, 3, 4, 2, 6)) 
+# 이상치 확인하기
+table(outlier$sex)
+
+table(outlier$score)
+
+# 결측 처리하기 - sex
+# sex가 3이면 NA 할당
+outlier$sex <- ifelse(outlier$sex == 3, NA, outlier$sex)
+
+#결측 처리하기 - score
+# sex가 1~5 아니면 NA 할당
+outlier$score <- ifelse(outlier$score > 5, NA, outlier$score)
+
+# 결측치 제외하고 분석
+outlier %>%
+  filter(!is.na(sex) & !is.na(score)) %>%
+  group_by(sex) %>%
+  summarise(mean_score = mean(score))
+
+mpg <- as.data.frame(ggplot2::mpg)
+View(mpg)
+boxplot(mpg$hwy)
+boxplot(mpg$hwy, range=2)
+summary(mpg$hwy)
+#상자그림 통계치 출력
+boxplot(mpg$hwy)$stats  # 상자그림 통계치 출력
+
+# 결측 처리하기
+# 12~37 벗어나면 NA 할당
+mpg$hwy <- ifelse(mpg$hwy < 12 | mpg$hwy > 37, NA, mpg$hwy)
+table(is.na(mpg$hwy))
+# 결측치 제외하고 분석하기
+mpg %>%
+  group_by(drv) %>%
+  summarise(mean_hwy = mean(hwy, na.rm = T))
 ```
 
 
@@ -405,6 +528,119 @@ mpg %>% filter(manufacturer == 'audi') %>%
 mpg %>% filter(manufacturer == 'audi') %>%
   arrange(desc(hwy)) %>% head(5)
 
+library(dplyr)
+# install.packages("ggplot2")
+str(ggplot2::mpg)
+
+# 7
+mpg <- as.data.frame(ggplot2::mpg)
+# 7-1
+mpgCopy <- mpg %>% mutate(sum_cty_hwy = cty + hwy)
+head(mpgCopy)
+
+# 7-2
+mpgCopy <- mpgCopy %>% mutate(avg_cty_hwy = sum_cty_hwy /2)
+head(mpgCopy)
+
+# 7-3
+mpgCopy %>% arrange(desc(avg_cty_hwy)) %>% head(3)
+
+# 7-4
+mpg %>% mutate(sum_cty_hwy = cty + hwy, avg_cty_hwy = sum_cty_hwy /2) %>%
+  arrange(desc(avg_cty_hwy)) %>% head(3)
+
+
+# 8
+# 8-1
+mpgCopy <- mpg %>% group_by(class) %>% summarise(mean_cty_class = mean(cty))
+mpgCopy
+
+# 8-2
+mpgCopy %>% arrange(desc(mean_cty_class))
+
+# 8-3
+mpg %>% group_by(manufacturer) %>% summarise(mean_hwy = mean(hwy)) %>% 
+  arrange(desc(mean_hwy)) %>% head(3)
+
+# 8-4
+mpg %>% filter(class == 'compact') %>% distinct(manufacturer, model) %>% 
+  count(manufacturer)  %>% arrange(desc(n))
+
+
+# 9
+fuel <- data.frame(fl = c('c', 'd', 'e', 'p', 'r'),
+                   price_fl = c(2.35, 2.38, 2.11, 2.76, 2.22),
+                   stringsAsFactors = F)
+# 9-1
+mpg_fuel <- left_join(mpg, fuel, by = "fl")
+dim(mpg); dim(mpg_fuel); head(mpg_fuel, 4)
+
+# 9-2
+mpg_fuel %>%  select(model, fl, price_fl) %>% head(5)
+
+
+# 10
+midwest <- as.data.frame(ggplot2::midwest)
+# 10-1
+midwestCopy <- midwest %>% 
+  mutate(perChild = (poptotal - popadults) / poptotal * 100)
+
+# 10-2
+midwestCopy %>% arrange(desc(perChild)) %>% 
+  select(county, perChild) %>% head(5)
+
+# 10-3
+midwestCopy %>% 
+  mutate(levelPerChild = ifelse(perChild >= 40, "large",
+                         ifelse(perChild >= 30, "middle", 'small'))) %>%
+  count(levelPerChild)
+
+# 10-4
+midwest %>% mutate(perAsian = popasian / poptotal * 100) %>%
+  arrange(perAsian) %>% head(10) %>% select (state, county, perAsian)
+  
+
+# 11
+mpg <- as.data.frame(ggplot2::mpg)
+mpg[c(65, 124, 131, 153, 212), "hwy"] <- NA
+# 11-1
+is.na(mpg[c('drv', 'hwy')])
+table(is.na(mpg$drv)); table(is.na(mpg$hwy))
+
+# 11-2
+mpg %>% filter(!is.na(mpg$hwy)) %>%  
+  group_by(drv) %>% summarise(mean_hwy = mean(hwy))
+
+na.omit(mpg) %>%  
+  group_by(drv) %>% summarise(mean_hwy = mean(hwy))
+
+mpg %>% group_by(drv) %>% 
+  summarise(mean_hwy = mean(hwy, na.rm = T))
+
+
+# 12
+mpg <- as.data.frame(ggplot2::mpg)
+mpg[c(10, 14, 58, 93), "drv"] <- 'k'
+mpg[c(29, 43, 129, 203), "cty"] <-c(3, 4, 39, 42)
+
+# 12-1
+table(mpg$drv)
+mpg$drv <- ifelse(mpg$drv %in% ('k'), NA, mpg$drv)
+table(mpg$drv)
+
+# 12-2
+boxplot(mpg$cty)
+boxplot(mpg$cty)$stats
+mpg$cty <- ifelse(mpg$cty < 9 | mpg$cty > 26, NA, mpg$cty)
+boxplot(mpg$cty)
+
+# 12-3
+mpg %>% filter(!is.na(mpg$drv)) %>%
+  group_by(drv) %>%
+  summarise(mean_cty = mean(cty, na.rm = T))
+
+na.omit(mpg) %>%  
+  group_by(drv) %>% summarise(mean_cty = mean(cty))
 
 ```
 
