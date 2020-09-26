@@ -2,7 +2,7 @@
 
 # Day1
 
-> Ajax&jQuery
+> Ajax + jQuery
 
 ### - 교육내용
 
