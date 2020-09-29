@@ -3,6 +3,10 @@
 # Day8
 
 > 동적크롤링
+>
+> selenium.jar 및 브라우저 드라이버 필요 (selenium-server-standalone-4.0.0-alpha-1.jar, chromedriver.exe )
+>
+> **java -****Dwebdriver.chrome.driver****="chromedriver.exe" -jar selenium-server-standalone-4.0.0-alpha-1.jar -port 4445**
 
 ### - 교육내용
 
