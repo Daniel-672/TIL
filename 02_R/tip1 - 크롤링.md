@@ -20,14 +20,14 @@
 
 board_tree_map <- c(1:25)[c(-1, -2, -8, -14, -20)]
 
-# 네이버 토론방 크롤링 리스트 제목 및 상세 링크
+# 네이버 주식 토론방 종목별 크롤링 리스트 제목 및 상세 링크
 library(httr)
 library(rvest)
 
 url_form <-"https://finance.naver.com/item/board.nhn?code=005930&page="
 comment.df <- NULL
 
-for (page in 1 : 100) {
+for (page in 1 : 10) {
   sent_url <- paste0(url_form, page)
   url <- sent_url
   ref <- sent_url
@@ -74,6 +74,27 @@ for (page in 1 : 100) {
 
 View(comment.df)
 write.csv(comment.df, "naver_comments.csv")
+
+
+
+
+# 상세 링크의 내용 및 댓글
+#body
+#cbox_module > div > div.u_cbox_content_wrap > ul > li.u_cbox_comment.cbox_module__comment_208906735._user_id_no_1erCa > div.u_cbox_comment_box > div > div.u_cbox_text_wrap > span
+# 네이버 토론방 크롤링 상세링크의 내용
+library(rvest)
+text<- NULL; title<-NULL; point<-NULL; review<-NULL; page=NULL
+url<- "https://finance.naver.com/item/board_read.nhn?code=005930&nid=145625118&st=&sw=&page=1"
+text <- read_html(url,  encoding="CP949")
+#View(text)
+nodes.detail.content <- html_nodes(text, "#body")
+vect.detail.content <- html_text(nodes.detail.content)
+vect.detail.content
+
+nodes.detail.comments <- html_nodes(text, "#cbox_module > div > div.u_cbox_content_wrap > ul")
+vect.detail.comments <- html_text(nodes.detail.comments)
+vect.detail.comments
+
 ```
 
 
