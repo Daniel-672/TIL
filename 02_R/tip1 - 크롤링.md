@@ -1,6 +1,6 @@
 # tip들
 
-### - 주식 정보 크롤링 (csv저장)
+### - 댓글 크롤링 (csv저장)
 
 ```R
 # 네이버 주식 토론방 종목별 크롤링 리스트 제목 및 상세
@@ -93,7 +93,9 @@ write.csv(comment.df, "naver_comments.csv")
 
 ```
 
-### - 주식 정보 크롤링 (DB 저장)
+
+
+### - 댓글 크롤링 (DB 저장)
 
 ```R
 # 네이버 주식 토론방 종목별 크롤링 리스트 제목 및 상세
@@ -232,6 +234,102 @@ dbDisconnect(conn)
 
 
 ```
+
+
+
+### - EPS, PER등 주식 참고 정보 크롤링 (DB저장)
+
+```R
+library(httr)
+library(rvest)
+library(readr)
+library(jsonlite)
+library(rJava)
+library(RJDBC)
+library(DBI)
+library(dplyr)
+
+# 마리아DB연동
+drv <- JDBC(driverClass = "org.mariadb.jdbc.Driver" ,"mariadb-java-client-2.6.2.jar")
+conn <- dbConnect(drv, 'jdbc:mariadb://127.0.0.1:3303/work', 'scott', 'tiger')
+
+# KRX 주식 종목 코드 가져오기
+# http://marketdata.krx.co.kr/mdi#document=13020401에서 개별 검색창에 로드된
+# json data(개발자 툴에서 MKD99000001.jspx의 response tab 복사)를 파일로 만들어 load
+stockCode <- fromJSON("stockCode.json")
+stockCodeList <- data.frame(stockCode$block1)
+# stockCodeList[which(stockCodeList$marketName == "KOSPI"), ]
+
+# 시총 20개만 추출
+company.code <- c("005930", "000660", "035420", "051910", "207940", "005935", "005380", "068270", "035720", "006400", "051900", "012330", "028260", "017670", "000270", "036570", "005490", "105560", "066570", "251270")
+#company.code <- c("036570")
+company.name <- c("삼성전자", "SK하이닉스", "NAVER", "LG화학", "삼성바이오로직스", "삼성전자우", "현대차", "셀트리온", "카카오", "삼성SDI", "LG생활건강", "현대모비스", "삼성물산", "SK텔레콤", "기아차", "엔씨소프트", "POSCO", "KB금융", "LG전자", "넷마블")
+yearRange <- c('2018', '2019', '2020')
+
+targetList <- stockCodeList %>% 
+              filter(short_code %in% paste0('A',company.code)) 
+
+gen_otp_url <- 'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+down_url <- 'http://file.krx.co.kr/download.jspx'
+stockInfoAll <- NULL
+
+for (cmpcnt in 1:length(targetList$full_code)) {
+  stockInfo3Y <- NULL
+  for (tyear in yearRange) {
+    gen_otp_data <- list(
+      name = "fileDown",
+      filetype = "csv",
+      url = "MKD/13/1302/13020401/mkd13020401",
+      market_gubun = "STK",
+      gubun = "2",
+      isu_cdnm = paste0(targetList$short_code[cmpcnt], "/", targetList$codeName[cmpcnt]),
+      isu_cd = targetList$full_code[cmpcnt],
+      isu_nm = targetList$codeName[cmpcnt],
+      isu_srt_cd = targetList$short_code[cmpcnt],
+    #  schdate = "20180903",
+      fromdate = paste0(tyear, "0101"),
+      todate = paste0(tyear, "1231"),
+      pagePath = "/contents/MKD/13/1302/13020401/MKD13020401.jsp"
+      )
+    
+    otp <- POST(gen_otp_url, query = gen_otp_data) %>%
+      read_html() %>%
+      html_text()
+    Sys.sleep(3)
+    down_ind <- POST(down_url, query = list(code = otp),
+                    add_headers(referer = gen_otp_url)) %>%
+                read_html() %>%
+                html_text() %>%
+                read_csv()
+    stockInfo1Y <- data.frame(down_ind)
+    stockInfo3Y <- rbind(stockInfo3Y, stockInfo1Y)
+    cat(cmpcnt, targetList$codeName[cmpcnt], tyear, "정보", length(stockInfo1Y$EPS), "적재 완료\n")
+  }
+  stockInfoAll <- rbind(stockInfoAll, stockInfo3Y)
+
+}
+
+colnames(stockInfoAll) <- c('closeDT', 'companyCode', 'companyName', 'controlYN',
+                            'closePrice', 'EPS', 'PER', 'BPS', 
+                            'PBR', 'DividendPS', 'DividendRate', 'seqNum', 'totCnt')
+# DB적재 전 na처리
+stockInfoAll$totCnt <- ifelse(is.na(stockInfoAll$totCnt), 0, stockInfoAll$totCnt)
+# DB적재 전 '-'처리
+stockInfoAll$EPS <- ifelse(stockInfoAll$EPS == "-", 0, stockInfoAll$EPS)
+stockInfoAll$PER <- ifelse(stockInfoAll$PER == "-", 0, stockInfoAll$PER)
+stockInfoAll$BPS <- ifelse(stockInfoAll$BPS == "-", 0, stockInfoAll$BPS)
+stockInfoAll$PBR <- ifelse(stockInfoAll$PBR == "-", 0, stockInfoAll$PBR)
+# DB적재 전 '넷마블게임즈'처리
+stockInfoAll$companyName <- ifelse(stockInfoAll$companyName == "넷마블게임즈", "넷마블", stockInfoAll$companyName)
+
+# View(stockInfoAll)
+delquery <- "delete from StockInfoPERESP"
+dbSendUpdate(conn, delquery)
+dbWriteTable(conn, "StockInfoPERESP", stockInfoAll, append = TRUE)
+cat("=========== DB 저장 완료 =========== \n") 
+```
+
+
 
 
 
