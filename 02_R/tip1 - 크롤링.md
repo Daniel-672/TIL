@@ -127,12 +127,10 @@ library(httr)
 library(rvest)
 
 board_tree_map <- c(1:25)[c(-1, -2, -8, -14, -20)]
-company.code <- c("005930", "000660", "035420", "051910", "207940", "005935", "005380", "068270",
-                  "035720", "006400", "051900", "012330", "028260", "017670", 
-                  "000270", "036570", "005490", "105560", "066570", "251270")
-company.name <- c("삼성전자", "SK하이닉스", "NAVER", "LG화학", "삼성바이오로직스", "삼성전자우",
-                  "현대차", "셀트리온", "카카오", "삼성SDI", "LG생활건강", "현대모비스", "삼성물산",
-                  "SK텔레콤", "기아차", "엔씨소프트", "POSCO", "KB금융", "LG전자", "넷마블")
+company.code <- c("삼성전자", "SK하이닉스", "NAVER", "LG화학", "삼성바이오로직스", "삼성전자우", "현대차", "셀트리온", "카카오", "삼성SDI", "LG생활건강", "현대모비스", "삼성물산", "SK텔레콤", "기아차", "엔씨소프트", "POSCO", "KB금융", "LG전자", "넷마블")
+
+company.name <- c("005930", "000660", "035420", "051910", "207940", "005935", "005380", "068270", "035720", "006400", "051900", "012330", "028260", "017670", "000270", "036570", "005490", "105560", "066570", "251270")
+
 company.list <- data.frame(company.code, company.name)
 #company.code <- "005930"
 pageData100 <- NULL
@@ -145,7 +143,7 @@ for (company.code in company.list$company.code) {
   
   url_form <-paste0("https://finance.naver.com/item/board.nhn?code=", company.code, "&page=")
   
-  for (page in 1 : 37000) {
+  for (page in 25201 : 37000) {
     sent_url <- paste0(url_form, page)
     url <- sent_url
     ref <- sent_url
@@ -225,7 +223,10 @@ for (company.code in company.list$company.code) {
       dbflag <- 0
       }
 
-    if (substring(pageData$commentDate[1],1,4) == "2017") {break}
+    if (substring(pageData$commentDate[1],1,4) == "2017") {
+      dbWriteTable(conn, "NaverComments", pageData100, append = TRUE)
+      break
+    }
   }
   
 }
