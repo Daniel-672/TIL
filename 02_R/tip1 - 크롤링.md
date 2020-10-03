@@ -221,12 +221,8 @@ for (company.code in company.list$company.code) {
           company.list$company.name[which(company.list$company.code == company.code)], 
           "의" , dbflag, "page", "DB 저장 완료 =========== \n")  
       dbflag <- 0
+      if (substring(pageData$commentDate[1],1,4) == "2017") { break }
       }
-
-    if (substring(pageData$commentDate[1],1,4) == "2017") {
-      dbWriteTable(conn, "NaverComments", pageData100, append = TRUE)
-      break
-    }
   }
   
 }
