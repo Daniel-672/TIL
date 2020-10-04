@@ -237,7 +237,7 @@ dbDisconnect(conn)
 
 
 
-### - EPS, PER등 주식 참고 정보 크롤링 (DB저장)
+### - 일별 EPS, PER등 주식 참고 정보 크롤링 (DB저장)
 
 ```R
 library(httr)
@@ -330,6 +330,103 @@ cat("=========== DB 저장 완료 =========== \n")
 ```
 
 
+
+### - 일별 주가변동 정보 크롤링 (DB저장)
+
+```R
+library(httr)
+library(rvest)
+library(readr)
+library(jsonlite)
+library(rJava)
+library(RJDBC)
+library(DBI)
+library(dplyr)
+
+# 마리아DB연동
+drv <- JDBC(driverClass = "org.mariadb.jdbc.Driver" ,"mariadb-java-client-2.6.2.jar")
+conn <- dbConnect(drv, 'jdbc:mariadb://127.0.0.1:3303/work', 'scott', 'tiger')
+
+# KRX 주식 종목 코드 가져오기
+# http://marketdata.krx.co.kr/mdi#document=13020401에서 개별 검색창에 로드된
+# json data(개발자 툴에서 MKD99000001.jspx의 response tab 복사)를 파일로 만들어 load
+stockCode <- fromJSON("stockCode.json")
+stockCodeList <- data.frame(stockCode$block1)
+# stockCodeList[which(stockCodeList$marketName == "KOSPI"), ]
+
+# 시총 20개만 추출
+company.code <- c("005930", "000660", "035420", "051910", "207940", "005935", "005380", "068270", "035720", "006400", "051900", "012330", "028260", "017670", "000270", "036570", "005490", "105560", "066570", "251270")
+#company.code <- c("005930")
+company.name <- c("삼성전자", "SK하이닉스", "NAVER", "LG화학", "삼성바이오로직스", "삼성전자우", "현대차", "셀트리온", "카카오", "삼성SDI", "LG생활건강", "현대모비스", "삼성물산", "SK텔레콤", "기아차", "엔씨소프트", "POSCO", "KB금융", "LG전자", "넷마블")
+yearRange <- c('2018', '2019', '2020')
+
+targetList <- stockCodeList %>% 
+              filter(short_code %in% paste0('A',company.code)) 
+
+gen_otp_url <- 'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+down_url <- 'http://file.krx.co.kr/download.jspx'
+stockPriceAll <- NULL
+
+for (cmpcnt in 1:length(targetList$full_code)) {
+  stockPrice3Y <- NULL
+  for (tyear in yearRange) {
+    gen_otp_data <- list(
+      name = "fileDown",
+      filetype = "csv",
+      url = "MKD/13/1302/13020103/mkd13020103_02",
+      isu_cdnm = paste0(targetList$short_code[cmpcnt], "/", targetList$codeName[cmpcnt]),
+      isu_cd = targetList$full_code[cmpcnt],
+      isu_nm = targetList$codeName[cmpcnt],
+      isu_srt_cd = targetList$short_code[cmpcnt],
+      fromdate = paste0(tyear, "0101"),
+      todate = paste0(tyear, "1231"),
+      pagePath = "/contents/MKD/13/1302/13020103/MKD13020103.jsp"
+      )
+    
+    otp <- POST(gen_otp_url, query = gen_otp_data) %>%
+      read_html() %>%
+      html_text()
+    Sys.sleep(2)
+    down_ind <- POST(down_url, query = list(code = otp),
+                    add_headers(referer = gen_otp_url)) %>%
+                read_html() %>%
+                html_text() %>%
+                read_csv()
+    stockPrice1Y <- data.frame(down_ind, companyCode <- substr(targetList$short_code[cmpcnt], 2, 8), companyName <- targetList$codeName[cmpcnt])
+    stockPrice3Y <- rbind(stockPrice3Y, stockPrice1Y)
+    cat(cmpcnt, targetList$codeName[cmpcnt], tyear, "정보", length(stockPrice1Y[,1]), "적재 완료\n")
+  }
+  stockPriceAll <- rbind(stockPriceAll, stockPrice3Y)
+
+}
+
+colnames(stockPriceAll) <- c('closeDT', 'closePrice', 'diffPrice', 'volumeCnt', 'volumeAmt', 
+                            'startPrice', 'highPrice', 'lowPrice', 'marketTotAmt', 'listedStockCnt', 'companyCode', 'companyName')
+# 컬럼 순서 바꾸기
+stockPriceAll[, c(2, 3, 11, 12) ] <- 
+  stockPriceAll[, c(11, 12, 2, 3) ]
+colnames(stockPriceAll) <- c('closeDT', 'companyCode', 'companyName', 'volumeCnt', 'volumeAmt', 
+                             'startPrice', 'highPrice', 'lowPrice', 'marketTotAmt', 'listedStockCnt', 'closePrice', 'diffPrice')
+
+
+# DB적재 전 na처리
+#stockPriceAll$totCnt <- ifelse(is.na(stockPriceAll$totCnt), 0, stockPriceAll$totCnt)
+# DB적재 전 '-'처리
+#stockPriceAll$EPS <- ifelse(stockPriceAll$EPS == "-", 0, stockPriceAll$EPS)
+#stockPriceAll$PER <- ifelse(stockPriceAll$PER == "-", 0, stockPriceAll$PER)
+#stockPriceAll$BPS <- ifelse(stockPriceAll$BPS == "-", 0, stockPriceAll$BPS)
+#stockPriceAll$PBR <- ifelse(stockPriceAll$PBR == "-", 0, stockPriceAll$PBR)
+# DB적재 전 '넷마블게임즈'처리
+stockPriceAll$companyName <- ifelse(stockPriceAll$companyName == "넷마블게임즈", "넷마블", stockPriceAll$companyName)
+# DB적재 전 '-'처리
+stockPriceAll$marketTotAmt <- stockPriceAll$marketTotAmt * 1000000
+
+# View(stockPriceAll)
+delquery <- "delete from StockInfoPrice"
+dbSendUpdate(conn, delquery)
+dbWriteTable(conn, "StockInfoPrice", stockPriceAll, append = TRUE)
+cat("=========== DB StockInfoPrice테이블 저장 완료 =========== \n") 
+```
 
 
 
