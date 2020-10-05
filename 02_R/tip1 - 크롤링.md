@@ -261,10 +261,15 @@ stockCodeList <- data.frame(stockCode$block1)
 # stockCodeList[which(stockCodeList$marketName == "KOSPI"), ]
 
 # 시총 20개만 추출
-company.code <- c("005930", "000660", "035420", "051910", "207940", "005935", "005380", "068270", "035720", "006400", "051900", "012330", "028260", "017670", "000270", "036570", "005490", "105560", "066570", "251270")
-#company.code <- c("036570")
-company.name <- c("삼성전자", "SK하이닉스", "NAVER", "LG화학", "삼성바이오로직스", "삼성전자우", "현대차", "셀트리온", "카카오", "삼성SDI", "LG생활건강", "현대모비스", "삼성물산", "SK텔레콤", "기아차", "엔씨소프트", "POSCO", "KB금융", "LG전자", "넷마블")
+# 시총 1 - 20위
+#company.code <- c("005930", "000660", "035420", "051910", "207940", "005935", "005380", "068270", "035720", "006400", "051900", "012330", "028260", "017670", "000270", "036570", "005490", "105560", "066570", "251270")
+# 시총 21 - 30위
+company.code <- c("034730", "055550", "018260", "015760", "096770", "003550", "032830", "033780", "009150")
 yearRange <- c('2018', '2019', '2020')
+
+# SK바아오팜은 2020년 만 있음
+#company.code <- c("326030")
+#yearRange <- c('2020')
 
 targetList <- stockCodeList %>% 
               filter(short_code %in% paste0('A',company.code)) 
@@ -280,7 +285,7 @@ for (cmpcnt in 1:length(targetList$full_code)) {
       name = "fileDown",
       filetype = "csv",
       url = "MKD/13/1302/13020401/mkd13020401",
-      market_gubun = "STK",
+      market_gubun = "ALL",
       gubun = "2",
       isu_cdnm = paste0(targetList$short_code[cmpcnt], "/", targetList$codeName[cmpcnt]),
       isu_cd = targetList$full_code[cmpcnt],
@@ -323,8 +328,8 @@ stockInfoAll$PBR <- ifelse(stockInfoAll$PBR == "-", 0, stockInfoAll$PBR)
 stockInfoAll$companyName <- ifelse(stockInfoAll$companyName == "넷마블게임즈", "넷마블", stockInfoAll$companyName)
 
 # View(stockInfoAll)
-delquery <- "delete from StockInfoPERESP"
-dbSendUpdate(conn, delquery)
+#delquery <- "delete from StockInfoPERESP"
+#dbSendUpdate(conn, delquery)
 dbWriteTable(conn, "StockInfoPERESP", stockInfoAll, append = TRUE)
 cat("=========== DB 저장 완료 =========== \n") 
 ```
