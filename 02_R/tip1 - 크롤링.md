@@ -435,3 +435,91 @@ cat("=========== DB StockInfoPrice테이블 저장 완료 =========== \n")
 
 
 
+### - 전처리 중~~~~~~~~
+
+```R
+#installed.packages()
+# 한국어 형태소 분석 패키지 설치
+# Rtools 설치
+# https://cran.r-project.org/bin/windows/Rtools/index.html
+# install.packages("Sejong")
+# install.packages("hash")
+# install.packages("tau")
+# install.packages("RSQLite")
+# install.packages("devtools")
+# install.packages("wordcloud")
+# install.packages("wordcloud2")
+library(wordcloud)
+library(wordcloud2)
+
+# github 버전 설치
+# install.packages("remotes")
+# 64bit 에서만 동작합니다.
+remotes::install_github('haven-jeon/KoNLP', upgrade = "never", INSTALL_opts=c("--no-multiarch"))
+
+library(KoNLP)
+useSejongDic()
+
+# 사전에 사용자 단어 추가
+add_words <- c("가즈아", "사고팔고", "매수매도", "가을", "암카오", "네이버")
+buildDictionary(user_dic=data.frame(add_words, rep("ncn", length(add_words))), replace_usr_dic=T)
+
+
+library(rJava)
+library(RJDBC)
+library(DBI)
+
+drv <- JDBC(driverClass = "org.mariadb.jdbc.Driver" ,"mariadb-java-client-2.6.2.jar")
+conn <- dbConnect(drv, 'jdbc:mariadb://127.0.0.1:3303/work', 'scott', 'tiger')
+
+RawQuerySet <- NULL
+RawQuerySet <- dbGetQuery(conn, "SELECT * FROM navercomments WHERE companyCode = '035720' ")
+# 네이버 035420 : 34,353 obs. of  10 variables:
+#head(RawQuerySet, 10)
+str(RawQuerySet)
+#length(RawQuerySet$commentDetail)
+# disconnect DB
+dbDisconnect(conn)
+
+
+length(RawQuerySet$commentDetail)
+clrQuerySet1 <- gsub("[[:lower:][:upper:][:punct:][:cntrl:]]", " ", RawQuerySet$commentDetail) 
+clrQuerySet2 <- gsub("[^가-힣a-zA-Z0-9' ']", " ", clrQuerySet1)
+clrQuerySet6 <- gsub("\\s+", " ", clrQuerySet2)
+write.csv(clrQuerySet6, "test.csv")
+
+words_data <- NULL
+system.time(words_data <- sapply(clrQuerySet6, extractNoun, USE.NAMES = F))
+length(words_data)
+str(words_data)
+
+#clrQuerySet3 <- gsub("[&^%*]", "", clrQuerySet2) 
+#clrQuerySet <- gsub("ㅋ*", "", clrQuerySet) 
+#head(clrQuerySet, 10)
+
+# 후행 공백 제거 
+# clrsQuerySet <- gsub("\\s+$", "", clrQuerySet)
+# head(clrsQuerySet, 10)
+# nchar(head(clrsQuerySet, 10))
+
+
+
+undata <- unlist(words_data)
+#head(undata)
+
+
+undata2 <- Filter(function(x) {nchar(x) >= 2}, undata)
+word_table2 <- table(undata2)
+#word_table2
+
+
+wordcount <- head(sort(word_table2, decreasing=T),50)
+
+
+
+
+# 워드 클라우드
+wordcloud2(wordcount, fontFamily = "맑은고딕", size=1,
+           color="random-light", backgroundColor="black")
+
+```
