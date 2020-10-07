@@ -449,6 +449,7 @@ cat("=========== DB StockInfoPrice테이블 저장 완료 =========== \n")
 # install.packages("devtools")
 # install.packages("wordcloud")
 # install.packages("wordcloud2")
+
 library(wordcloud)
 library(wordcloud2)
 
@@ -473,25 +474,53 @@ drv <- JDBC(driverClass = "org.mariadb.jdbc.Driver" ,"mariadb-java-client-2.6.2.
 conn <- dbConnect(drv, 'jdbc:mariadb://127.0.0.1:3303/work', 'scott', 'tiger')
 
 RawQuerySet <- NULL
-RawQuerySet <- dbGetQuery(conn, "SELECT * FROM navercomments WHERE companyCode = '035720' ")
+RawQuerySet <- dbGetQuery(conn, "SELECT * FROM navercomments WHERE companyCode = '207940' ")
 # 네이버 035420 : 34,353 obs. of  10 variables:
 #head(RawQuerySet, 10)
 str(RawQuerySet)
 #length(RawQuerySet$commentDetail)
-# disconnect DB
-dbDisconnect(conn)
 
 
 length(RawQuerySet$commentDetail)
 clrQuerySet1 <- gsub("[[:lower:][:upper:][:punct:][:cntrl:]]", " ", RawQuerySet$commentDetail) 
-clrQuerySet2 <- gsub("[^가-힣a-zA-Z0-9' ']", " ", clrQuerySet1)
-clrQuerySet6 <- gsub("\\s+", " ", clrQuerySet2)
+clrQuerySet2 <- gsub("[^가-힣0-9' ']", " ", clrQuerySet1)
+clrQuerySet3 <- gsub("[가-힣]{20, }", " ", clrQuerySet2)
+clrQuerySet6 <- gsub("\\s+", " ", clrQuerySet3)
 write.csv(clrQuerySet6, "test.csv")
 
 words_data <- NULL
-system.time(words_data <- sapply(clrQuerySet6, extractNoun, USE.NAMES = F))
+system.time(words_data <- sapply(clrQuerySet6, extractNoun, USE.NAMES = FALSE))
 length(words_data)
-str(words_data)
+head(words_data)
+# str(words_data)
+
+
+
+word.list <- NULL
+for (i in 1 : length(words_data)) { 
+  word.list <- append(word.list, paste(words_data[[i]],  collapse = '/'))  
+  }
+
+
+uploadWords <- data.frame(companyCode <- RawQuerySet$companyCode,
+                       companyName <- RawQuerySet$commentID,
+                       commentDate <- RawQuerySet$commentDate,
+                       words <- word.list)
+
+
+
+
+
+# disconnect DB
+dbDisconnect(conn)
+
+
+
+
+
+
+strsplit(word.list, "/")
+
 
 #clrQuerySet3 <- gsub("[&^%*]", "", clrQuerySet2) 
 #clrQuerySet <- gsub("ㅋ*", "", clrQuerySet) 
@@ -501,7 +530,6 @@ str(words_data)
 # clrsQuerySet <- gsub("\\s+$", "", clrQuerySet)
 # head(clrsQuerySet, 10)
 # nchar(head(clrsQuerySet, 10))
-
 
 
 undata <- unlist(words_data)
@@ -521,5 +549,7 @@ wordcount <- head(sort(word_table2, decreasing=T),50)
 # 워드 클라우드
 wordcloud2(wordcount, fontFamily = "맑은고딕", size=1,
            color="random-light", backgroundColor="black")
+
+
 
 ```
