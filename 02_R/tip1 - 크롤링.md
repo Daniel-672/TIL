@@ -435,7 +435,7 @@ cat("=========== DB StockInfoPrice테이블 저장 완료 =========== \n")
 
 
 
-### - 전처리 중~~~~~~~~
+### - 전처리 각 종목별로 형태소 분석 후 단어를 DB에 저장
 
 ```R
 #installed.packages()
@@ -453,19 +453,18 @@ cat("=========== DB StockInfoPrice테이블 저장 완료 =========== \n")
 library(wordcloud)
 library(wordcloud2)
 
-# github 버전 설치
-# install.packages("remotes")
-# 64bit 에서만 동작합니다.
-remotes::install_github('haven-jeon/KoNLP', upgrade = "never", INSTALL_opts=c("--no-multiarch"))
-
+# rm(list = ls())
+#rm("clrQuerySet3")
 library(KoNLP)
 useSejongDic()
-
+# github 버전 설치
+# install.packages("remotes")
+remotes::install_github('haven-jeon/KoNLP', upgrade = "never", INSTALL_opts=c("--no-multiarch"))
 # 사전에 사용자 단어 추가
 add_words <- c("가즈아", "사고팔고", "매수매도", "가을", "암카오", "네이버")
 buildDictionary(user_dic=data.frame(add_words, rep("ncn", length(add_words))), replace_usr_dic=T)
 
-
+options(java.parameters = "-Xmx8000m")
 library(rJava)
 library(RJDBC)
 library(DBI)
@@ -473,82 +472,61 @@ library(DBI)
 drv <- JDBC(driverClass = "org.mariadb.jdbc.Driver" ,"mariadb-java-client-2.6.2.jar")
 conn <- dbConnect(drv, 'jdbc:mariadb://127.0.0.1:3303/work', 'scott', 'tiger')
 
-RawQuerySet <- NULL
-RawQuerySet <- dbGetQuery(conn, "SELECT * FROM navercomments WHERE companyCode = '207940' ")
-# 네이버 035420 : 34,353 obs. of  10 variables:
-#head(RawQuerySet, 10)
-str(RawQuerySet)
-#length(RawQuerySet$commentDetail)
+# "005930", "000660", "035420", "051910", "207940", "005935", "005380", "068270", 
+# "035720", "006400", "051900", "012330", "028260", "017670", "000270", "036570", 
+# "005490", "105560", "066570", "251270", "034730", "055550", "018260", "015760", 
+# "096770", "003550", "326030", "032830", "033780", "009150"
 
 
-length(RawQuerySet$commentDetail)
-clrQuerySet1 <- gsub("[[:lower:][:upper:][:punct:][:cntrl:]]", " ", RawQuerySet$commentDetail) 
-clrQuerySet2 <- gsub("[^가-힣0-9' ']", " ", clrQuerySet1)
-clrQuerySet3 <- gsub("[가-힣]{20, }", " ", clrQuerySet2)
-clrQuerySet6 <- gsub("\\s+", " ", clrQuerySet3)
-write.csv(clrQuerySet6, "test.csv")
+company.code <- c("035420", "051910", "207940", "005935", "005380", "068270", 
+              "035720", "006400", "051900", "012330", "028260", "017670", "000270", 
+              "036570", "005490", "105560", "066570", "251270", "034730", "055550", 
+              "018260", "015760", "096770", "003550", "326030", "032830", "033780", "009150")
 
-words_data <- NULL
-system.time(words_data <- sapply(clrQuerySet6, extractNoun, USE.NAMES = FALSE))
-length(words_data)
-head(words_data)
-# str(words_data)
+for (cmp in company.code) {
 
+  queryString <- paste0("SELECT companyCode, commentID, commentDate, commentDetail FROM navercomments WHERE companyCode = '", cmp, "' ")
+  RawQuerySet <- NULL
+  RawQuerySet <- dbGetQuery(conn, queryString)
+  # 네이버 035420 : 34,353 obs. of  10 variables:
+  # str(RawQuerySet)
+  cat("DB Load 완료:", length(RawQuerySet$commentDetail), "\n")
+  
+  clrQuerySet1 <- gsub("[[:lower:][:upper:][:punct:][:cntrl:]]", " ", RawQuerySet$commentDetail) 
+  clrQuerySet2 <- gsub("[^가-힣0-9' ']", " ", clrQuerySet1)
+  clrQuerySet3 <- gsub("[가-힣]{20, }", " ", clrQuerySet2)
+  clrQuerySet6 <- gsub("\\s+", " ", clrQuerySet3)
+  # write.csv(clrQuerySet6, "test.csv")
+  
 
-
-word.list <- NULL
-for (i in 1 : length(words_data)) { 
-  word.list <- append(word.list, paste(words_data[[i]],  collapse = '/'))  
+  words_data <- NULL
+  system.time(words_data <- sapply(clrQuerySet6, extractNoun, USE.NAMES = FALSE))
+  length(words_data)
+  
+  word.list <- NULL
+  for (i in 1 : length(words_data)) { 
+    word.list <- append(word.list, paste(words_data[[i]],  collapse = '/'))  
+    cat("companyCode:", cmp, "for순번:", i, "\n")
   }
+  
+  uploadWords <- NULL
+  cat("companyCode:",length(RawQuerySet$companyCode), "\n")
+  cat("commentID:",length(RawQuerySet$commentID), "\n")
+  cat("commentDate:",length(RawQuerySet$commentDate), "\n")
+  cat("word.list:",length(word.list), "\n")
+  uploadWords <- data.frame(companyCode <- RawQuerySet$companyCode,
+                            commentID <- RawQuerySet$commentID,
+                            commentDate <- RawQuerySet$commentDate,
+                            words <- word.list)
+  colnames(uploadWords) <- c('companyCode', 'commentID', 'commentDate', 'words')
+  
+  dbWriteTable(conn, "NaverDetailWords_raw", uploadWords, append = TRUE)
+  cat("===========", cmp, 
+      "의" , length(uploadWords$companyCode), "개 DB 저장 완료 =========== \n") 
 
+}
 
-uploadWords <- data.frame(companyCode <- RawQuerySet$companyCode,
-                       companyName <- RawQuerySet$commentID,
-                       commentDate <- RawQuerySet$commentDate,
-                       words <- word.list)
-
-
-
-
-
-# disconnect DB
 dbDisconnect(conn)
-
-
-
-
-
-
-strsplit(word.list, "/")
-
-
-#clrQuerySet3 <- gsub("[&^%*]", "", clrQuerySet2) 
-#clrQuerySet <- gsub("ㅋ*", "", clrQuerySet) 
-#head(clrQuerySet, 10)
-
-# 후행 공백 제거 
-# clrsQuerySet <- gsub("\\s+$", "", clrQuerySet)
-# head(clrsQuerySet, 10)
-# nchar(head(clrsQuerySet, 10))
-
-
-undata <- unlist(words_data)
-#head(undata)
-
-
-undata2 <- Filter(function(x) {nchar(x) >= 2}, undata)
-word_table2 <- table(undata2)
-#word_table2
-
-
-wordcount <- head(sort(word_table2, decreasing=T),50)
-
-
-
-
-# 워드 클라우드
-wordcloud2(wordcount, fontFamily = "맑은고딕", size=1,
-           color="random-light", backgroundColor="black")
 
 
 
