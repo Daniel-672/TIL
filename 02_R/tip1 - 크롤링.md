@@ -531,3 +531,87 @@ dbDisconnect(conn)
 
 
 ```
+
+
+
+### - 형태소로 분리되어 저장된 정보를 불러 월별 단어 카운트
+
+```R
+#options(java.parameters = "-Xmx8000m")
+library(rJava)
+library(RJDBC)
+library(DBI)
+rm(list = ls())
+
+drv <- JDBC(driverClass = "org.mariadb.jdbc.Driver" ,"mariadb-java-client-2.6.2.jar")
+conn <- dbConnect(drv, 'jdbc:mariadb://127.0.0.1:3303/work', 'scott', 'tiger')
+
+# "005930", "000660", "035420", "051910", "207940", "005935", "005380", "068270", 
+# "035720", "006400", "051900", "012330", "028260", "017670", "000270", "036570", 
+# "005490", "105560", "066570", "251270", "034730", "055550", "018260", "015760", 
+# "096770", "003550", "326030", "032830", "033780", "009150"
+
+
+company.code <- c("005930", "000660", "035420", "051910", "207940", "005935", "005380", "068270", 
+                  "035720", "006400", "051900", "012330", "028260", "017670", "000270", "036570", 
+                  "005490", "105560", "066570", "251270", "034730", "055550", "018260", "015760", 
+                  "096770", "003550", "326030", "032830", "033780", "009150")
+
+for (cmp in company.code) {
+
+  rqueryString <- paste0("SELECT distinct substr(commentDate,1,7) AS commentMonth FROM NaverDetailWords 
+                         WHERE companyCode = '", cmp, "' ORDER BY substr(commentDate,1,7)")
+  looplist <- NULL
+  looplist <- dbGetQuery(conn, rqueryString)
+  #length(looplist$commentMonth)
+    
+    all_save_rank <- NULL; all_oneMonth <- NULL; all_companyCode <- NULL; all_type <- NULL
+    
+    for (oneMonth in looplist$commentMonth) {
+      cat(cmp, oneMonth, "DB load 시작",  "\n")
+      queryString <- paste0("SELECT words FROM NaverDetailWords WHERE companyCode = '", cmp, "' AND ", 
+                            "substr(commentDate,1,7) = ", "'", oneMonth , "'" )
+      RawQuerySet <- NULL
+      RawQuerySet <- dbGetQuery(conn, queryString)
+      cat(cmp, oneMonth, "DB load 완료",  "\n")
+      
+      cleanSet <- RawQuerySet$words
+      pop_set <- strsplit(cleanSet, "/")
+
+      unpop_set <- unlist(pop_set)
+      unpop_set1 <- gsub("들이|같이|비공감공감비공감|하기", "", unpop_set)
+      unpop_set2 <- gsub("[0-9]", "", unpop_set1)
+      cunpop_set <- Filter(function(x) {nchar(x) >= 2}, unpop_set2)
+      
+      cunpop_set.table <- table(cunpop_set)
+      
+      wordsrank <- head(sort(cunpop_set.table, decreasing=T),10)
+
+      save_rank <- paste(names(wordsrank), wordsrank, sep=':', collapse = '/')
+      
+      cat(cmp, oneMonth, "append 시작",  "\n")
+      all_companyCode <- c(all_companyCode, cmp)      
+      all_oneMonth <- c(all_oneMonth, oneMonth)
+      all_save_rank <- c(all_save_rank, save_rank)
+      all_type <- c(all_type, "M")
+      cat(cmp, oneMonth, "append 완료",  "\n")
+    }
+
+    uploadResult <- data.frame(all_companyCode <- all_companyCode,
+                               all_oneMonth <- all_oneMonth,
+                               all_save_rank <- all_save_rank,
+                               all_type <- all_type)
+    colnames(uploadResult) <- c('companyCode', 'timeBase', 'wordsRank', 'type')
+    
+    dbWriteTable(conn, "NaverWordsRank", uploadResult, append = TRUE)
+    cat("===========", cmp, 
+        "의" , length(uploadResult$companyCode), "개 DB 저장 완료 =========== \n") 
+  
+}
+
+
+# disconnect DB
+dbDisconnect(conn)
+
+```
+
