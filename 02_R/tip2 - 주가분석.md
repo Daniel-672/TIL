@@ -1,6 +1,6 @@
 # tip들
 
-### - Drowdown
+### - table.Drawdowns
 
 ```R
 library(ggplot2)
