@@ -12,7 +12,15 @@ conda config --show channels
 
 
 
-### 
+### - 64bit운영에 32bit 파이썬 설치하기
+
+```python
+set CONDA_FORCE_32BIT=1
+conda create --name AT python=3.7
+conda activate AT
+```
+
+
 
 
 
