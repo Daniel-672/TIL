@@ -1,6 +1,6 @@
 
 
-# Day14
+# 분석Day01
 
 >  데이터 수집
 
@@ -39,9 +39,6 @@ import os
 print(os.getcwd())
 ```
 
-    c:\PyStexam
-
-
 
 ```python
 !jupyter kernelspec list
@@ -51,20 +48,6 @@ print(os.getcwd())
 ```python
 !dir
 ```
-
-     C 드라이브의 볼륨에는 이름이 없습니다.
-     볼륨 일련 번호: B6D4-3AF0
-    
-     c:\PyStexam 디렉터리
-    
-    2020-10-14  오후 01:09    <DIR>          .
-    2020-10-14  오후 01:09    <DIR>          ..
-    2020-10-14  오전 10:43    <DIR>          .ipynb_checkpoints
-    2020-10-14  오후 01:09            30,927 exam1.ipynb
-    2020-10-14  오후 01:07             1,862 test.ipynb
-                   2개 파일              32,789 바이트
-                   3개 디렉터리  77,910,646,784 바이트 남음
-
 
 
 ```python
@@ -79,26 +62,6 @@ print("[ header 정보 ]----------")
 for s in res_header :
     print(s)
 ```
-
-    <class 'http.client.HTTPResponse'>
-    200
-    11
-    OK
-    [ header 정보 ]----------
-    ('Server', 'NWS')
-    ('Date', 'Wed, 14 Oct 2020 01:59:24 GMT')
-    ('Content-Type', 'text/html; charset=UTF-8')
-    ('Transfer-Encoding', 'chunked')
-    ('Connection', 'close')
-    ('Set-Cookie', 'PM_CK_loc=40ae94d20ae3b96716d9b18600847aee8665678b3a66eba699d0d1ac0bd4662a; Expires=Thu, 15 Oct 2020 01:59:24 GMT; Path=/; HttpOnly')
-    ('Cache-Control', 'no-cache, no-store, must-revalidate')
-    ('Pragma', 'no-cache')
-    ('P3P', 'CP="CAO DSP CURa ADMa TAIa PSAa OUR LAW STP PHY ONL UNI PUR FIN COM NAV INT DEM STA PRE"')
-    ('X-Frame-Options', 'DENY')
-    ('X-XSS-Protection', '1; mode=block')
-    ('Strict-Transport-Security', 'max-age=63072000; includeSubdomains')
-    ('Referrer-Policy', 'unsafe-url')
-
 
 
 ```python
@@ -147,50 +110,6 @@ print(text)
 print("===========================================================")
 ```
 
-    ===========================================================
-    <class 'http.client.HTTPResponse'>
-    <class 'http.client.HTTPMessage'>
-    https://www.python.org/  페이지의 인코딩 정보 : utf-8
-    <!doctype html>
-    <!--[if lt IE 7]>   <html class="no-js ie6 lt-ie7 lt-ie8 lt-ie9">   <![endif]-->
-    <!--[if IE 7]>      <html class="no-js ie7 lt-ie8 lt-ie9">          <![endif]-->
-    <!--[if IE 8]>      <html class="no-js ie8 lt-ie9">                 <![endif]-->
-    <!--[if gt IE 8]><!--><html class="no-js" lang="en" dir="ltr">  <!--<![endif]-->
-    
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-        <link rel="prefetch" href="//ajax.googleapis.com/ajax/libs/jqu
-    ===========================================================
-    https://www.daum.net/  페이지의 인코딩 정보 : utf-8
-    <!DOCTYPE html>
-    <html lang="ko" class="">
-    <head>
-    <meta charset="utf-8"/>
-    <title>Daum</title>
-    <meta property="og:url" content="https://www.daum.net/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Daum">
-    <meta property="og:image" content="//i1.daumcdn.net/svc/image/U03/common_icon/5587C4E4012FCD0001">
-    <meta property="og:description" content="나의 관심 콘텐츠를 가장 즐겁게 볼 수 있는 Daum">
-    <meta name="msapplication-task" content="name=Daum;action-
-    ===========================================================
-    https://www.aladin.co.kr/home/welcome.aspx  페이지의 인코딩 정보 : utf-8
-    
-    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
-    <html>
-      <head>    
-          <title id="Title">알라딘</title>
-          <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    	  <meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
-    	  <meta content="C#" name="CODE_LANGUAGE">
-    	  <meta content="JavaScript" name="vs_defaultClientScript">
-    	  <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
-          <meta http-equiv="
-    ===========================================================
-
-
 
 ```python
 from urllib.parse import urlparse
@@ -236,19 +155,6 @@ with urllib.request.urlopen(url) as f:
     print(f.read().decode('utf-8'))
 ```
 
-    URL 인코딩 규칙이 적용된 문자열 : name=%EC%9C%A0%EB%8B%88%EC%BD%94&age=10
-    http://unico2013.dothome.co.kr/crawling/get.php?name=%EC%9C%A0%EB%8B%88%EC%BD%94&age=10
-    ﻿<!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>POST TEST</title>
-      </head>
-      <body>
-       <h1>GET : 이름은 유니코이고 나이는 10이네요!!</h1>   </body>
-    </html>
-
-
 
 ```python
 import urllib.request
@@ -262,19 +168,6 @@ with urllib.request.urlopen(url, postdata) as f:
     print(f.read().decode('utf-8'))
 ```
 
-    URL 인코딩 규칙이 적용된 문자열 : name=%EC%9C%A0%EB%8B%88%EC%BD%94&age=10
-    변환된 바이트 문자열 : b'name=%EC%9C%A0%EB%8B%88%EC%BD%94&age=10'
-    ﻿<!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>POST TEST</title>
-      </head>
-      <body>
-       <h1>POST : 이름은 유니코이고 나이는 10이네요!!</h1>   </body>
-    </html>
-
-
 
 ```python
 import urllib.request
@@ -287,18 +180,6 @@ print(req)
 with urllib.request.urlopen(req) as f:
     print(f.read().decode('utf-8'))
 ```
-
-    <urllib.request.Request object at 0x00000235EA813188>
-    ﻿<!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>POST TEST</title>
-      </head>
-      <body>
-       <h1>POST : 이름은 유니코이고 나이는 10이네요!!</h1>   </body>
-    </html>
-
 
 
 ```python
@@ -329,33 +210,6 @@ else :
     print('응답된 콘텐츠가 없어요')
 
 ```
-
-    <class 'requests.models.Response'>
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="UTF-8">
-    <title>테스트</title>
-    </head>
-    <body>
-    <h1>웹 크롤링을 테스트 합니다.</h1>
-    </body>
-    </html>
-    ----------------------------------------------------------
-    <class 'requests.models.Response'>
-    응답된 콘텐츠가 없어요
-    ----------------------------------------------------------
-    <class 'requests.models.Response'>
-    ﻿<!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>POST TEST</title>
-      </head>
-      <body>
-       <h1>POST : 이름은 백도이고 나이는 12이네요!!</h1>   </body>
-    </html>
-
 
 
 ```python
@@ -402,13 +256,6 @@ r = requests.get(urlstr, params=tupledata)
 print(r.url)
 ```
 
-    http://unico2013.dothome.co.kr/crawling/get.php?key1=value1&key2=value2
-    ------------------------------------
-    http://unico2013.dothome.co.kr/crawling/get.php?key1=value1&key2=value2&key2=value3
-    ------------------------------------
-    http://unico2013.dothome.co.kr/crawling/get.php?key1=value1&key1=value2
-
-
 
 ```python
 import requests
@@ -425,39 +272,6 @@ print('------------------------------------')
 print(r.content.decode('utf-8'))
 ```
 
-    ï»¿<!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>POST TEST</title>
-      </head>
-      <body>
-       <h1>GET : ì´ë¦ê³¼ ëì´ë¥¼ ì ë¬í´ ì£¼ì¸ì!!</h1>   </body>
-    </html>
-    ------------------------------------
-    ﻿<!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>POST TEST</title>
-      </head>
-      <body>
-       <h1>GET : 이름과 나이를 전달해 주세요!!</h1>   </body>
-    </html>
-    ------------------------------------
-    b'\xef\xbb\xbf<!DOCTYPE html>\r\n<html>\r\n  <head>\r\n    <meta charset="utf-8">\r\n    <title>POST TEST</title>\r\n  </head>\r\n  <body>\r\n   <h1>GET : \xec\x9d\xb4\xeb\xa6\x84\xea\xb3\xbc \xeb\x82\x98\xec\x9d\xb4\xeb\xa5\xbc \xec\xa0\x84\xeb\x8b\xac\xed\x95\xb4 \xec\xa3\xbc\xec\x84\xb8\xec\x9a\x94!!</h1>   </body>\r\n</html>'
-    ------------------------------------
-    ﻿<!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>POST TEST</title>
-      </head>
-      <body>
-       <h1>GET : 이름과 나이를 전달해 주세요!!</h1>   </body>
-    </html>
-
-
 
 ```python
 import requests
@@ -470,10 +284,6 @@ print(i)
 print(type(i))
 i.save("c:/Temp/test.jpg")
 ```
-
-    <PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=1280x853 at 0x235EA771948>
-    <class 'PIL.JpegImagePlugin.JpegImageFile'>
-
 
 
 ```python
@@ -493,9 +303,6 @@ bs = BeautifulSoup(html_doc, 'html.parser')
 print(type(bs))
 ```
 
-    <class 'bs4.BeautifulSoup'>
-
-
 
 ```python
 html_doc = """
@@ -514,25 +321,6 @@ from bs4 import BeautifulSoup
 bs = BeautifulSoup(html_doc, 'html.parser')
 print(bs.prettify())
 ```
-
-    <!DOCTYPE html>
-    <html>
-     <head>
-      <meta charset="utf-8"/>
-      <title>
-       Test BeautifulSoup
-      </title>
-     </head>
-     <body>
-      <p align="center">
-       P태그의 컨텐트
-      </p>
-      <img src="http://unico2013.dothome.co.kr/image/flower.jpg" width="300"/>
-     </body>
-    </html>
-
-
-​    
 
 
 ```python
@@ -602,23 +390,6 @@ print(type(bs.ul.li.contents), ':', bs.ul.li.contents)
 print(type(bs.ul.li.strong.contents), ':', bs.ul.li.strong.contents)
 ```
 
-    [ string 속성 ]
-    <class 'bs4.element.NavigableString'> : P태그의 컨텐트
-    <class 'NoneType'> : None
-    <class 'NoneType'> : None
-    <class 'bs4.element.NavigableString'> : 강조
-    [ text 속성 ]
-    <class 'str'> : P태그의 컨텐트
-    <class 'str'> : None
-    <class 'str'> : 테스트1강조
-    <class 'str'> : 강조
-    [ contents 속성 ]
-    <class 'list'> : ['P태그의 컨텐트']
-    <class 'list'> : None
-    <class 'list'> : ['테스트1', <strong>강조</strong>]
-    <class 'list'> : ['강조']
-
-
 
 ```python
 html_doc="""
@@ -654,21 +425,6 @@ print("----------------")
 for tag in ptags :
     print(tag)
 ```
-
-    <class 'bs4.element.Tag'>
-    <class 'bs4.element.ResultSet'>
-    ---------------------------------
-    <title>Test BeautifulSoup</title>
-    <p align="center"> text contents </p>
-    <img src="http://unico2013.dothome.co.kr/image/flower.jpg" width="500"/>
-    ---------------------------------
-    [<p align="center"> text contents </p>, <p align="right">  text contents 2 </p>, <p align="left">   text contents 3 </p>, <p>text contents 4</p>]
-    ----------------
-    <p align="center"> text contents </p>
-    <p align="right">  text contents 2 </p>
-    <p align="left">   text contents 3 </p>
-    <p>text contents 4</p>
-
 
 
 ```python
@@ -736,7 +492,7 @@ for content in title3:
     print(content.text)
 print("------------------------------")
 for content in img:
-   print(content["src"])
+    print(content["src"])
 ```
 
 
@@ -744,6 +500,7 @@ for content in img:
 import requests
 from bs4 import BeautifulSoup
 import re
+
 req = requests.get('http://movie.naver.com/movie/point/af/list.nhn?page=1')
 html = req.text
 soup = BeautifulSoup(html, 'html.parser')
@@ -806,7 +563,6 @@ for n in range(1,31):
 
 
 ```python
-#파일명 : exam5_3.py
 import urllib.request
 from bs4 import BeautifulSoup
 data = urllib.request.urlopen('https://comic.naver.com/genre/bestChallenge.nhn')
@@ -901,9 +657,10 @@ for location in soup.find_all("location"):
     min_w = location.find_all('tmn')
     max_w = location.find_all('tmx')
     weather = [a.string+"~"+b.string for a, b in zip(min_w, max_w)]
-
+    print('1', loc, info)
     if not (loc in info):
         info[loc] = []
+        print('2', loc, info)
     for data in weather:
         info[loc].append(data)
 print(info)
@@ -961,5 +718,23 @@ if r.text :
     print(r.text)
 else :
     print('응답된 콘텐츠가 없어요')
+```
+
+```python
+import requests
+dicdata = None
+# dicdata = {'regDate': 20201013}
+urlstr = 'https://news.daum.net/ranking/popular/'
+
+r = requests.get(urlstr, params=dicdata)
+r.encoding = 'utf-8'
+
+
+print(r.text)
+
+with open('C:\PyStexam\news.csv', "wt", encoding="utf-8") as f:
+    f.write('기사제목, 온라인뉴스매체명\n')  
+    for i in range(len(title)):
+        f.write(title[i]+","+link[i]+'\n')  
 ```
 
