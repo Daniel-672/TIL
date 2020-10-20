@@ -2,7 +2,7 @@
 
 # 분석Day05
 
->  데이터 수집 & pandas
+>  pandas
 
 ### - 교육내용
 
@@ -45,268 +45,6 @@ display(df4)
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>c0</th>
-      <th>c1</th>
-      <th>c2</th>
-      <th>c3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>1</td>
-      <td>4</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>2</td>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>3</td>
-      <td>6</td>
-      <td>9</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-
-
-​    
-​    
-
-        0   1   2   3
-    0  c0  c1  c2  c3
-    1   0   1   4   7
-    2   1   2   5   8
-    3   2   3   6   9
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>c0</td>
-      <td>c1</td>
-      <td>c2</td>
-      <td>c3</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>1</td>
-      <td>4</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>2</td>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2</td>
-      <td>3</td>
-      <td>6</td>
-      <td>9</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-
-
-​    
-​    
-
-       c0  c1  c2  c3
-    0   0   1   4   7
-    1   1   2   5   8
-    2   2   3   6   9
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>c0</th>
-      <th>c1</th>
-      <th>c2</th>
-      <th>c3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>1</td>
-      <td>4</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>2</td>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>3</td>
-      <td>6</td>
-      <td>9</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-
-
-​    
-​    
-
-        c1  c2  c3
-    c0            
-    0    1   4   7
-    1    2   5   8
-    2    3   6   9
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>c1</th>
-      <th>c2</th>
-      <th>c3</th>
-    </tr>
-    <tr>
-      <th>c0</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>4</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>6</td>
-      <td>9</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-
-
-
 ```python
 # 예제 2-2
 import pandas as pd
@@ -322,619 +60,6 @@ print(df2)
 display(df2)
 pd.get_option('display.max_columns')
 ```
-
-      전력량 (억㎾h) 발전 전력별  1990  1991  1992  1993  1994  1995  1996  1997  ...  2007  \
-    0        남한     합계  1077  1186  1310  1444  1650  1847  2055  2244  ...  4031   
-    1       NaN     수력    64    51    49    60    41    55    52    54  ...    50   
-    2       NaN     화력   484   573   696   803  1022  1122  1264  1420  ...  2551   
-    3       NaN    원자력   529   563   565   581   587   670   739   771  ...  1429   
-    4       NaN    신재생     -     -     -     -     -     -     -     -  ...     -   
-    5        북한     합계   277   263   247   221   231   230   213   193  ...   236   
-    6       NaN     수력   156   150   142   133   138   142   125   107  ...   133   
-    7       NaN     화력   121   113   105    88    93    88    88    86  ...   103   
-    8       NaN    원자력     -     -     -     -     -     -     -     -  ...     -   
-    
-       2008  2009  2010  2011  2012  2013  2014  2015  2016  
-    0  4224  4336  4747  4969  5096  5171  5220  5281  5404  
-    1    56    56    65    78    77    84    78    58    66  
-    2  2658  2802  3196  3343  3430  3581  3427  3402  3523  
-    3  1510  1478  1486  1547  1503  1388  1564  1648  1620  
-    4     -     -     -     -    86   118   151   173   195  
-    5   255   235   237   211   215   221   216   190   239  
-    6   141   125   134   132   135   139   130   100   128  
-    7   114   110   103    79    80    82    86    90   111  
-    8     -     -     -     -     -     -     -     -     -  
-    
-    [9 rows x 29 columns]
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>전력량 (억㎾h)</th>
-      <th>발전 전력별</th>
-      <th>1990</th>
-      <th>1991</th>
-      <th>1992</th>
-      <th>1993</th>
-      <th>1994</th>
-      <th>1995</th>
-      <th>1996</th>
-      <th>1997</th>
-      <th>...</th>
-      <th>2007</th>
-      <th>2008</th>
-      <th>2009</th>
-      <th>2010</th>
-      <th>2011</th>
-      <th>2012</th>
-      <th>2013</th>
-      <th>2014</th>
-      <th>2015</th>
-      <th>2016</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>남한</td>
-      <td>합계</td>
-      <td>1077</td>
-      <td>1186</td>
-      <td>1310</td>
-      <td>1444</td>
-      <td>1650</td>
-      <td>1847</td>
-      <td>2055</td>
-      <td>2244</td>
-      <td>...</td>
-      <td>4031</td>
-      <td>4224</td>
-      <td>4336</td>
-      <td>4747</td>
-      <td>4969</td>
-      <td>5096</td>
-      <td>5171</td>
-      <td>5220</td>
-      <td>5281</td>
-      <td>5404</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>NaN</td>
-      <td>수력</td>
-      <td>64</td>
-      <td>51</td>
-      <td>49</td>
-      <td>60</td>
-      <td>41</td>
-      <td>55</td>
-      <td>52</td>
-      <td>54</td>
-      <td>...</td>
-      <td>50</td>
-      <td>56</td>
-      <td>56</td>
-      <td>65</td>
-      <td>78</td>
-      <td>77</td>
-      <td>84</td>
-      <td>78</td>
-      <td>58</td>
-      <td>66</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>NaN</td>
-      <td>화력</td>
-      <td>484</td>
-      <td>573</td>
-      <td>696</td>
-      <td>803</td>
-      <td>1022</td>
-      <td>1122</td>
-      <td>1264</td>
-      <td>1420</td>
-      <td>...</td>
-      <td>2551</td>
-      <td>2658</td>
-      <td>2802</td>
-      <td>3196</td>
-      <td>3343</td>
-      <td>3430</td>
-      <td>3581</td>
-      <td>3427</td>
-      <td>3402</td>
-      <td>3523</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>NaN</td>
-      <td>원자력</td>
-      <td>529</td>
-      <td>563</td>
-      <td>565</td>
-      <td>581</td>
-      <td>587</td>
-      <td>670</td>
-      <td>739</td>
-      <td>771</td>
-      <td>...</td>
-      <td>1429</td>
-      <td>1510</td>
-      <td>1478</td>
-      <td>1486</td>
-      <td>1547</td>
-      <td>1503</td>
-      <td>1388</td>
-      <td>1564</td>
-      <td>1648</td>
-      <td>1620</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>NaN</td>
-      <td>신재생</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>...</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>86</td>
-      <td>118</td>
-      <td>151</td>
-      <td>173</td>
-      <td>195</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>북한</td>
-      <td>합계</td>
-      <td>277</td>
-      <td>263</td>
-      <td>247</td>
-      <td>221</td>
-      <td>231</td>
-      <td>230</td>
-      <td>213</td>
-      <td>193</td>
-      <td>...</td>
-      <td>236</td>
-      <td>255</td>
-      <td>235</td>
-      <td>237</td>
-      <td>211</td>
-      <td>215</td>
-      <td>221</td>
-      <td>216</td>
-      <td>190</td>
-      <td>239</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>NaN</td>
-      <td>수력</td>
-      <td>156</td>
-      <td>150</td>
-      <td>142</td>
-      <td>133</td>
-      <td>138</td>
-      <td>142</td>
-      <td>125</td>
-      <td>107</td>
-      <td>...</td>
-      <td>133</td>
-      <td>141</td>
-      <td>125</td>
-      <td>134</td>
-      <td>132</td>
-      <td>135</td>
-      <td>139</td>
-      <td>130</td>
-      <td>100</td>
-      <td>128</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>NaN</td>
-      <td>화력</td>
-      <td>121</td>
-      <td>113</td>
-      <td>105</td>
-      <td>88</td>
-      <td>93</td>
-      <td>88</td>
-      <td>88</td>
-      <td>86</td>
-      <td>...</td>
-      <td>103</td>
-      <td>114</td>
-      <td>110</td>
-      <td>103</td>
-      <td>79</td>
-      <td>80</td>
-      <td>82</td>
-      <td>86</td>
-      <td>90</td>
-      <td>111</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>NaN</td>
-      <td>원자력</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>...</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-  </tbody>
-</table>
-<p>9 rows × 29 columns</p>
-
-</div>
-
-
-              0       1     2     3     4     5     6     7     8     9   ...  \
-    0  전력량 (억㎾h)  발전 전력별  1990  1991  1992  1993  1994  1995  1996  1997  ...   
-    1         남한      합계  1077  1186  1310  1444  1650  1847  2055  2244  ...   
-    2        NaN      수력    64    51    49    60    41    55    52    54  ...   
-    3        NaN      화력   484   573   696   803  1022  1122  1264  1420  ...   
-    4        NaN     원자력   529   563   565   581   587   670   739   771  ...   
-    5        NaN     신재생     -     -     -     -     -     -     -     -  ...   
-    6         북한      합계   277   263   247   221   231   230   213   193  ...   
-    7        NaN      수력   156   150   142   133   138   142   125   107  ...   
-    8        NaN      화력   121   113   105    88    93    88    88    86  ...   
-    9        NaN     원자력     -     -     -     -     -     -     -     -  ...   
-    
-         19    20    21    22    23    24    25    26    27    28  
-    0  2007  2008  2009  2010  2011  2012  2013  2014  2015  2016  
-    1  4031  4224  4336  4747  4969  5096  5171  5220  5281  5404  
-    2    50    56    56    65    78    77    84    78    58    66  
-    3  2551  2658  2802  3196  3343  3430  3581  3427  3402  3523  
-    4  1429  1510  1478  1486  1547  1503  1388  1564  1648  1620  
-    5     -     -     -     -     -    86   118   151   173   195  
-    6   236   255   235   237   211   215   221   216   190   239  
-    7   133   141   125   134   132   135   139   130   100   128  
-    8   103   114   110   103    79    80    82    86    90   111  
-    9     -     -     -     -     -     -     -     -     -     -  
-    
-    [10 rows x 29 columns]
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>...</th>
-      <th>19</th>
-      <th>20</th>
-      <th>21</th>
-      <th>22</th>
-      <th>23</th>
-      <th>24</th>
-      <th>25</th>
-      <th>26</th>
-      <th>27</th>
-      <th>28</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>전력량 (억㎾h)</td>
-      <td>발전 전력별</td>
-      <td>1990</td>
-      <td>1991</td>
-      <td>1992</td>
-      <td>1993</td>
-      <td>1994</td>
-      <td>1995</td>
-      <td>1996</td>
-      <td>1997</td>
-      <td>...</td>
-      <td>2007</td>
-      <td>2008</td>
-      <td>2009</td>
-      <td>2010</td>
-      <td>2011</td>
-      <td>2012</td>
-      <td>2013</td>
-      <td>2014</td>
-      <td>2015</td>
-      <td>2016</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>남한</td>
-      <td>합계</td>
-      <td>1077</td>
-      <td>1186</td>
-      <td>1310</td>
-      <td>1444</td>
-      <td>1650</td>
-      <td>1847</td>
-      <td>2055</td>
-      <td>2244</td>
-      <td>...</td>
-      <td>4031</td>
-      <td>4224</td>
-      <td>4336</td>
-      <td>4747</td>
-      <td>4969</td>
-      <td>5096</td>
-      <td>5171</td>
-      <td>5220</td>
-      <td>5281</td>
-      <td>5404</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>NaN</td>
-      <td>수력</td>
-      <td>64</td>
-      <td>51</td>
-      <td>49</td>
-      <td>60</td>
-      <td>41</td>
-      <td>55</td>
-      <td>52</td>
-      <td>54</td>
-      <td>...</td>
-      <td>50</td>
-      <td>56</td>
-      <td>56</td>
-      <td>65</td>
-      <td>78</td>
-      <td>77</td>
-      <td>84</td>
-      <td>78</td>
-      <td>58</td>
-      <td>66</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>NaN</td>
-      <td>화력</td>
-      <td>484</td>
-      <td>573</td>
-      <td>696</td>
-      <td>803</td>
-      <td>1022</td>
-      <td>1122</td>
-      <td>1264</td>
-      <td>1420</td>
-      <td>...</td>
-      <td>2551</td>
-      <td>2658</td>
-      <td>2802</td>
-      <td>3196</td>
-      <td>3343</td>
-      <td>3430</td>
-      <td>3581</td>
-      <td>3427</td>
-      <td>3402</td>
-      <td>3523</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>NaN</td>
-      <td>원자력</td>
-      <td>529</td>
-      <td>563</td>
-      <td>565</td>
-      <td>581</td>
-      <td>587</td>
-      <td>670</td>
-      <td>739</td>
-      <td>771</td>
-      <td>...</td>
-      <td>1429</td>
-      <td>1510</td>
-      <td>1478</td>
-      <td>1486</td>
-      <td>1547</td>
-      <td>1503</td>
-      <td>1388</td>
-      <td>1564</td>
-      <td>1648</td>
-      <td>1620</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>NaN</td>
-      <td>신재생</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>...</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>86</td>
-      <td>118</td>
-      <td>151</td>
-      <td>173</td>
-      <td>195</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>북한</td>
-      <td>합계</td>
-      <td>277</td>
-      <td>263</td>
-      <td>247</td>
-      <td>221</td>
-      <td>231</td>
-      <td>230</td>
-      <td>213</td>
-      <td>193</td>
-      <td>...</td>
-      <td>236</td>
-      <td>255</td>
-      <td>235</td>
-      <td>237</td>
-      <td>211</td>
-      <td>215</td>
-      <td>221</td>
-      <td>216</td>
-      <td>190</td>
-      <td>239</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>NaN</td>
-      <td>수력</td>
-      <td>156</td>
-      <td>150</td>
-      <td>142</td>
-      <td>133</td>
-      <td>138</td>
-      <td>142</td>
-      <td>125</td>
-      <td>107</td>
-      <td>...</td>
-      <td>133</td>
-      <td>141</td>
-      <td>125</td>
-      <td>134</td>
-      <td>132</td>
-      <td>135</td>
-      <td>139</td>
-      <td>130</td>
-      <td>100</td>
-      <td>128</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>NaN</td>
-      <td>화력</td>
-      <td>121</td>
-      <td>113</td>
-      <td>105</td>
-      <td>88</td>
-      <td>93</td>
-      <td>88</td>
-      <td>88</td>
-      <td>86</td>
-      <td>...</td>
-      <td>103</td>
-      <td>114</td>
-      <td>110</td>
-      <td>103</td>
-      <td>79</td>
-      <td>80</td>
-      <td>82</td>
-      <td>86</td>
-      <td>90</td>
-      <td>111</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>NaN</td>
-      <td>원자력</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>...</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-  </tbody>
-</table>
-<p>10 rows × 29 columns</p>
-
-</div>
 
 
 
@@ -958,737 +83,9 @@ display(df2)
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>전력량 (억㎾h)</th>
-      <th>발전 전력별</th>
-      <th>1990</th>
-      <th>1991</th>
-      <th>1992</th>
-      <th>1993</th>
-      <th>1994</th>
-      <th>1995</th>
-      <th>1996</th>
-      <th>1997</th>
-      <th>1998</th>
-      <th>1999</th>
-      <th>2000</th>
-      <th>2001</th>
-      <th>2002</th>
-      <th>2003</th>
-      <th>2004</th>
-      <th>2005</th>
-      <th>2006</th>
-      <th>2007</th>
-      <th>2008</th>
-      <th>2009</th>
-      <th>2010</th>
-      <th>2011</th>
-      <th>2012</th>
-      <th>2013</th>
-      <th>2014</th>
-      <th>2015</th>
-      <th>2016</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>남한</td>
-      <td>합계</td>
-      <td>1077</td>
-      <td>1186</td>
-      <td>1310</td>
-      <td>1444</td>
-      <td>1650</td>
-      <td>1847</td>
-      <td>2055</td>
-      <td>2244</td>
-      <td>2153</td>
-      <td>2393</td>
-      <td>2664</td>
-      <td>2852</td>
-      <td>3065</td>
-      <td>3225</td>
-      <td>3421</td>
-      <td>3646</td>
-      <td>3812</td>
-      <td>4031</td>
-      <td>4224</td>
-      <td>4336</td>
-      <td>4747</td>
-      <td>4969</td>
-      <td>5096</td>
-      <td>5171</td>
-      <td>5220</td>
-      <td>5281</td>
-      <td>5404</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>NaN</td>
-      <td>수력</td>
-      <td>64</td>
-      <td>51</td>
-      <td>49</td>
-      <td>60</td>
-      <td>41</td>
-      <td>55</td>
-      <td>52</td>
-      <td>54</td>
-      <td>61</td>
-      <td>61</td>
-      <td>56</td>
-      <td>42</td>
-      <td>53</td>
-      <td>69</td>
-      <td>59</td>
-      <td>52</td>
-      <td>52</td>
-      <td>50</td>
-      <td>56</td>
-      <td>56</td>
-      <td>65</td>
-      <td>78</td>
-      <td>77</td>
-      <td>84</td>
-      <td>78</td>
-      <td>58</td>
-      <td>66</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>NaN</td>
-      <td>화력</td>
-      <td>484</td>
-      <td>573</td>
-      <td>696</td>
-      <td>803</td>
-      <td>1022</td>
-      <td>1122</td>
-      <td>1264</td>
-      <td>1420</td>
-      <td>1195</td>
-      <td>1302</td>
-      <td>1518</td>
-      <td>1689</td>
-      <td>1821</td>
-      <td>1859</td>
-      <td>2056</td>
-      <td>2127</td>
-      <td>2272</td>
-      <td>2551</td>
-      <td>2658</td>
-      <td>2802</td>
-      <td>3196</td>
-      <td>3343</td>
-      <td>3430</td>
-      <td>3581</td>
-      <td>3427</td>
-      <td>3402</td>
-      <td>3523</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>NaN</td>
-      <td>원자력</td>
-      <td>529</td>
-      <td>563</td>
-      <td>565</td>
-      <td>581</td>
-      <td>587</td>
-      <td>670</td>
-      <td>739</td>
-      <td>771</td>
-      <td>897</td>
-      <td>1031</td>
-      <td>1090</td>
-      <td>1121</td>
-      <td>1191</td>
-      <td>1297</td>
-      <td>1307</td>
-      <td>1468</td>
-      <td>1487</td>
-      <td>1429</td>
-      <td>1510</td>
-      <td>1478</td>
-      <td>1486</td>
-      <td>1547</td>
-      <td>1503</td>
-      <td>1388</td>
-      <td>1564</td>
-      <td>1648</td>
-      <td>1620</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>NaN</td>
-      <td>신재생</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>86</td>
-      <td>118</td>
-      <td>151</td>
-      <td>173</td>
-      <td>195</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>북한</td>
-      <td>합계</td>
-      <td>277</td>
-      <td>263</td>
-      <td>247</td>
-      <td>221</td>
-      <td>231</td>
-      <td>230</td>
-      <td>213</td>
-      <td>193</td>
-      <td>170</td>
-      <td>186</td>
-      <td>194</td>
-      <td>202</td>
-      <td>190</td>
-      <td>196</td>
-      <td>206</td>
-      <td>215</td>
-      <td>225</td>
-      <td>236</td>
-      <td>255</td>
-      <td>235</td>
-      <td>237</td>
-      <td>211</td>
-      <td>215</td>
-      <td>221</td>
-      <td>216</td>
-      <td>190</td>
-      <td>239</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>NaN</td>
-      <td>수력</td>
-      <td>156</td>
-      <td>150</td>
-      <td>142</td>
-      <td>133</td>
-      <td>138</td>
-      <td>142</td>
-      <td>125</td>
-      <td>107</td>
-      <td>102</td>
-      <td>103</td>
-      <td>102</td>
-      <td>106</td>
-      <td>106</td>
-      <td>117</td>
-      <td>125</td>
-      <td>131</td>
-      <td>126</td>
-      <td>133</td>
-      <td>141</td>
-      <td>125</td>
-      <td>134</td>
-      <td>132</td>
-      <td>135</td>
-      <td>139</td>
-      <td>130</td>
-      <td>100</td>
-      <td>128</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>NaN</td>
-      <td>화력</td>
-      <td>121</td>
-      <td>113</td>
-      <td>105</td>
-      <td>88</td>
-      <td>93</td>
-      <td>88</td>
-      <td>88</td>
-      <td>86</td>
-      <td>68</td>
-      <td>83</td>
-      <td>92</td>
-      <td>96</td>
-      <td>84</td>
-      <td>79</td>
-      <td>81</td>
-      <td>84</td>
-      <td>99</td>
-      <td>103</td>
-      <td>114</td>
-      <td>110</td>
-      <td>103</td>
-      <td>79</td>
-      <td>80</td>
-      <td>82</td>
-      <td>86</td>
-      <td>90</td>
-      <td>111</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>NaN</td>
-      <td>원자력</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>10</th>
-      <th>11</th>
-      <th>12</th>
-      <th>13</th>
-      <th>14</th>
-      <th>15</th>
-      <th>16</th>
-      <th>17</th>
-      <th>18</th>
-      <th>19</th>
-      <th>20</th>
-      <th>21</th>
-      <th>22</th>
-      <th>23</th>
-      <th>24</th>
-      <th>25</th>
-      <th>26</th>
-      <th>27</th>
-      <th>28</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>전력량 (억㎾h)</td>
-      <td>발전 전력별</td>
-      <td>1990</td>
-      <td>1991</td>
-      <td>1992</td>
-      <td>1993</td>
-      <td>1994</td>
-      <td>1995</td>
-      <td>1996</td>
-      <td>1997</td>
-      <td>1998</td>
-      <td>1999</td>
-      <td>2000</td>
-      <td>2001</td>
-      <td>2002</td>
-      <td>2003</td>
-      <td>2004</td>
-      <td>2005</td>
-      <td>2006</td>
-      <td>2007</td>
-      <td>2008</td>
-      <td>2009</td>
-      <td>2010</td>
-      <td>2011</td>
-      <td>2012</td>
-      <td>2013</td>
-      <td>2014</td>
-      <td>2015</td>
-      <td>2016</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>남한</td>
-      <td>합계</td>
-      <td>1077</td>
-      <td>1186</td>
-      <td>1310</td>
-      <td>1444</td>
-      <td>1650</td>
-      <td>1847</td>
-      <td>2055</td>
-      <td>2244</td>
-      <td>2153</td>
-      <td>2393</td>
-      <td>2664</td>
-      <td>2852</td>
-      <td>3065</td>
-      <td>3225</td>
-      <td>3421</td>
-      <td>3646</td>
-      <td>3812</td>
-      <td>4031</td>
-      <td>4224</td>
-      <td>4336</td>
-      <td>4747</td>
-      <td>4969</td>
-      <td>5096</td>
-      <td>5171</td>
-      <td>5220</td>
-      <td>5281</td>
-      <td>5404</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>NaN</td>
-      <td>수력</td>
-      <td>64</td>
-      <td>51</td>
-      <td>49</td>
-      <td>60</td>
-      <td>41</td>
-      <td>55</td>
-      <td>52</td>
-      <td>54</td>
-      <td>61</td>
-      <td>61</td>
-      <td>56</td>
-      <td>42</td>
-      <td>53</td>
-      <td>69</td>
-      <td>59</td>
-      <td>52</td>
-      <td>52</td>
-      <td>50</td>
-      <td>56</td>
-      <td>56</td>
-      <td>65</td>
-      <td>78</td>
-      <td>77</td>
-      <td>84</td>
-      <td>78</td>
-      <td>58</td>
-      <td>66</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>NaN</td>
-      <td>화력</td>
-      <td>484</td>
-      <td>573</td>
-      <td>696</td>
-      <td>803</td>
-      <td>1022</td>
-      <td>1122</td>
-      <td>1264</td>
-      <td>1420</td>
-      <td>1195</td>
-      <td>1302</td>
-      <td>1518</td>
-      <td>1689</td>
-      <td>1821</td>
-      <td>1859</td>
-      <td>2056</td>
-      <td>2127</td>
-      <td>2272</td>
-      <td>2551</td>
-      <td>2658</td>
-      <td>2802</td>
-      <td>3196</td>
-      <td>3343</td>
-      <td>3430</td>
-      <td>3581</td>
-      <td>3427</td>
-      <td>3402</td>
-      <td>3523</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>NaN</td>
-      <td>원자력</td>
-      <td>529</td>
-      <td>563</td>
-      <td>565</td>
-      <td>581</td>
-      <td>587</td>
-      <td>670</td>
-      <td>739</td>
-      <td>771</td>
-      <td>897</td>
-      <td>1031</td>
-      <td>1090</td>
-      <td>1121</td>
-      <td>1191</td>
-      <td>1297</td>
-      <td>1307</td>
-      <td>1468</td>
-      <td>1487</td>
-      <td>1429</td>
-      <td>1510</td>
-      <td>1478</td>
-      <td>1486</td>
-      <td>1547</td>
-      <td>1503</td>
-      <td>1388</td>
-      <td>1564</td>
-      <td>1648</td>
-      <td>1620</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>NaN</td>
-      <td>신재생</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>86</td>
-      <td>118</td>
-      <td>151</td>
-      <td>173</td>
-      <td>195</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>북한</td>
-      <td>합계</td>
-      <td>277</td>
-      <td>263</td>
-      <td>247</td>
-      <td>221</td>
-      <td>231</td>
-      <td>230</td>
-      <td>213</td>
-      <td>193</td>
-      <td>170</td>
-      <td>186</td>
-      <td>194</td>
-      <td>202</td>
-      <td>190</td>
-      <td>196</td>
-      <td>206</td>
-      <td>215</td>
-      <td>225</td>
-      <td>236</td>
-      <td>255</td>
-      <td>235</td>
-      <td>237</td>
-      <td>211</td>
-      <td>215</td>
-      <td>221</td>
-      <td>216</td>
-      <td>190</td>
-      <td>239</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>NaN</td>
-      <td>수력</td>
-      <td>156</td>
-      <td>150</td>
-      <td>142</td>
-      <td>133</td>
-      <td>138</td>
-      <td>142</td>
-      <td>125</td>
-      <td>107</td>
-      <td>102</td>
-      <td>103</td>
-      <td>102</td>
-      <td>106</td>
-      <td>106</td>
-      <td>117</td>
-      <td>125</td>
-      <td>131</td>
-      <td>126</td>
-      <td>133</td>
-      <td>141</td>
-      <td>125</td>
-      <td>134</td>
-      <td>132</td>
-      <td>135</td>
-      <td>139</td>
-      <td>130</td>
-      <td>100</td>
-      <td>128</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>NaN</td>
-      <td>화력</td>
-      <td>121</td>
-      <td>113</td>
-      <td>105</td>
-      <td>88</td>
-      <td>93</td>
-      <td>88</td>
-      <td>88</td>
-      <td>86</td>
-      <td>68</td>
-      <td>83</td>
-      <td>92</td>
-      <td>96</td>
-      <td>84</td>
-      <td>79</td>
-      <td>81</td>
-      <td>84</td>
-      <td>99</td>
-      <td>103</td>
-      <td>114</td>
-      <td>110</td>
-      <td>103</td>
-      <td>79</td>
-      <td>80</td>
-      <td>82</td>
-      <td>86</td>
-      <td>90</td>
-      <td>111</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>NaN</td>
-      <td>원자력</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-
-
-
 ```python
 pd.reset_option("^display")
 ```
-
-
-
-
-    20
 
 
 
@@ -2346,5 +743,972 @@ print(tdf10)
 
 
 ```python
+import pandas as pd
+# 문제1
+df = pd.read_csv('./data/score.csv', header=0)
+print("컬럼명 :", df.columns)
+print("인덱스 :", df.index)
 
+# df['total'] = df.sum(axis=1)
+df['total'] = df.kor + df.eng + df.mat
+df['avg'] = round(df.total / 3, 2)
+display(df)
 ```
+
+    컬럼명 : Index(['name', 'kor', 'eng', 'mat'], dtype='object')
+    인덱스 : RangeIndex(start=0, stop=5, step=1)
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>kor</th>
+      <th>eng</th>
+      <th>mat</th>
+      <th>total</th>
+      <th>avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>둘리</td>
+      <td>90</td>
+      <td>90</td>
+      <td>90</td>
+      <td>270</td>
+      <td>90.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>또치</td>
+      <td>80</td>
+      <td>80</td>
+      <td>80</td>
+      <td>240</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>도우너</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>210</td>
+      <td>70.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>희동이</td>
+      <td>90</td>
+      <td>80</td>
+      <td>70</td>
+      <td>240</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>마이콜</td>
+      <td>60</td>
+      <td>50</td>
+      <td>50</td>
+      <td>160</td>
+      <td>53.33</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+```python
+# 문제2
+df = pd.read_csv('./data/score_noheader.csv', header=None)
+display(df)
+print("컬럼명 :", df.columns)
+print("인덱스 :", df.index)
+
+print("컬럼명 추가 --------------")
+df.columns=['name', 'kor', 'eng', 'mat']
+print("컬럼명 :", df.columns)
+display(df)
+
+print("total과 avg열 추가 --------------")
+df['total'] = df.kor + df.eng + df.mat
+df['avg'] = round(df.total / 3, 2)
+display(df)
+```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>둘리</td>
+      <td>90</td>
+      <td>90</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>또치</td>
+      <td>80</td>
+      <td>80</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>도우너</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>희동이</td>
+      <td>90</td>
+      <td>80</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>마이콜</td>
+      <td>60</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+    컬럼명 : Int64Index([0, 1, 2, 3], dtype='int64')
+    인덱스 : RangeIndex(start=0, stop=5, step=1)
+    컬럼명 추가 --------------
+    컬럼명 : Index(['name', 'kor', 'eng', 'mat'], dtype='object')
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>kor</th>
+      <th>eng</th>
+      <th>mat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>둘리</td>
+      <td>90</td>
+      <td>90</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>또치</td>
+      <td>80</td>
+      <td>80</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>도우너</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>희동이</td>
+      <td>90</td>
+      <td>80</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>마이콜</td>
+      <td>60</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+    total과 avg열 추가 --------------
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>kor</th>
+      <th>eng</th>
+      <th>mat</th>
+      <th>total</th>
+      <th>avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>둘리</td>
+      <td>90</td>
+      <td>90</td>
+      <td>90</td>
+      <td>270</td>
+      <td>90.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>또치</td>
+      <td>80</td>
+      <td>80</td>
+      <td>80</td>
+      <td>240</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>도우너</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>210</td>
+      <td>70.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>희동이</td>
+      <td>90</td>
+      <td>80</td>
+      <td>70</td>
+      <td>240</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>마이콜</td>
+      <td>60</td>
+      <td>50</td>
+      <td>50</td>
+      <td>160</td>
+      <td>53.33</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+```python
+# 문제3
+df = pd.read_csv('./data/score_header.csv', header=3)
+display(df)
+print("컬럼명 :", df.columns)
+print("인덱스 :", df.index)
+
+df['total'] = df.kor + df.eng + df.mat
+df['avg'] = round(df.total / 3, 2)
+display(df)
+for i in range(0, 3) :
+    df.to_csv("C:/Temp/score_result.csv", index=False, header=False, mode='a')
+```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>kor</th>
+      <th>eng</th>
+      <th>mat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>둘리</td>
+      <td>90</td>
+      <td>90</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>또치</td>
+      <td>80</td>
+      <td>80</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>도우너</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>희동이</td>
+      <td>90</td>
+      <td>80</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>마이콜</td>
+      <td>60</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+    컬럼명 : Index(['name', 'kor', 'eng', 'mat'], dtype='object')
+    인덱스 : RangeIndex(start=0, stop=5, step=1)
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>kor</th>
+      <th>eng</th>
+      <th>mat</th>
+      <th>total</th>
+      <th>avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>둘리</td>
+      <td>90</td>
+      <td>90</td>
+      <td>90</td>
+      <td>270</td>
+      <td>90.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>또치</td>
+      <td>80</td>
+      <td>80</td>
+      <td>80</td>
+      <td>240</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>도우너</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>210</td>
+      <td>70.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>희동이</td>
+      <td>90</td>
+      <td>80</td>
+      <td>70</td>
+      <td>240</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>마이콜</td>
+      <td>60</td>
+      <td>50</td>
+      <td>50</td>
+      <td>160</td>
+      <td>53.33</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+```python
+# 문제4
+df = pd.read_excel('./data/score.xlsx', header=0) 
+display(df)
+
+df['total'] = df.kor + df.eng + df.mat
+df['avg'] = round(df.total / 3, 2)
+df.sort_values(by='total', ascending=False, inplace=True)
+display(df)
+
+df.to_excel("c:/Temp/score_result1.xlsx")
+df.to_excel("c:/Temp/score_result2.xlsx", index=False)
+```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>kor</th>
+      <th>eng</th>
+      <th>mat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>둘리</td>
+      <td>90</td>
+      <td>90</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>또치</td>
+      <td>80</td>
+      <td>80</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>도우너</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>희동이</td>
+      <td>90</td>
+      <td>80</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>마이콜</td>
+      <td>60</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>고길동</td>
+      <td>90</td>
+      <td>90</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>kor</th>
+      <th>eng</th>
+      <th>mat</th>
+      <th>total</th>
+      <th>avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>둘리</td>
+      <td>90</td>
+      <td>90</td>
+      <td>90</td>
+      <td>270</td>
+      <td>90.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>또치</td>
+      <td>80</td>
+      <td>80</td>
+      <td>80</td>
+      <td>240</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>희동이</td>
+      <td>90</td>
+      <td>80</td>
+      <td>70</td>
+      <td>240</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>도우너</td>
+      <td>70</td>
+      <td>70</td>
+      <td>70</td>
+      <td>210</td>
+      <td>70.00</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>고길동</td>
+      <td>90</td>
+      <td>90</td>
+      <td>0</td>
+      <td>180</td>
+      <td>60.00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>마이콜</td>
+      <td>60</td>
+      <td>50</td>
+      <td>50</td>
+      <td>160</td>
+      <td>53.33</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+```python
+# 문제5
+df = pd.read_json('./data/mydata.json')  
+print("기본정보 보기")
+print(df.info())
+
+print("앞에서 부터 5개만 미리 보기")
+print(df.head())
+
+print("뒤에서 부터 5개만 미리 보기")
+print(df.tail())
+
+print("앞에서 부터 10개만 미리 보기")
+print(df.head(10))
+print(df.shape)
+print('행의 개수 :', df.shape[0], '열의 개수 :', df.shape[1])
+```
+
+    기본정보 보기
+    <class 'pandas.core.frame.DataFrame'>
+    RangeIndex: 24 entries, 0 to 23
+    Data columns (total 4 columns):
+     #   Column  Non-Null Count  Dtype
+    ---  ------  --------------  -----
+     0   year    24 non-null     int64
+     1   item1   24 non-null     int64
+     2   item2   24 non-null     int64
+     3   item3   24 non-null     int64
+    dtypes: int64(4)
+    memory usage: 896.0 bytes
+    None
+    앞에서 부터 5개만 미리 보기
+       year  item1  item2  item3
+    0  1990     95     20     15
+    1  1991     65     10     35
+    2  1992     45     30     90
+    3  1993     10     40     70
+    4  1994     22     50     50
+    뒤에서 부터 5개만 미리 보기
+        year  item1  item2  item3
+    19  2009     99     90     70
+    20  2010     75     85     45
+    21  2011     22     42     22
+    22  2012     63     13     30
+    23  2013     80     40     90
+    앞에서 부터 10개만 미리 보기
+       year  item1  item2  item3
+    0  1990     95     20     15
+    1  1991     65     10     35
+    2  1992     45     30     90
+    3  1993     10     40     70
+    4  1994     22     50     50
+    5  1995     35     70     30
+    6  1996     40     80     25
+    7  1997     25     90     75
+    8  1998     15     57     95
+    9  1999     45     79     33
+    (24, 4)
+    행의 개수 : 24 열의 개수 : 4
+
+
+
+```python
+# 문제6
+df = pd.read_csv('./data/mpgdata.csv', header=0)
+print('앞에서 부터 3개만 미리 보기')
+display(df.head(3))
+print('행의 개수', df.shape[0])
+print('열의 개수', df.shape[1])
+print('기술통계 정보 요약')
+display(df.describe())
+```
+
+    앞에서 부터 3개만 미리 보기
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mpg</th>
+      <th>cylinders</th>
+      <th>displacement</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>model-year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>307.0</td>
+      <td>130.0</td>
+      <td>3504</td>
+      <td>12.0</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15.0</td>
+      <td>8</td>
+      <td>350.0</td>
+      <td>165.0</td>
+      <td>3693</td>
+      <td>11.5</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>318.0</td>
+      <td>150.0</td>
+      <td>3436</td>
+      <td>11.0</td>
+      <td>70</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+    행의 개수 398
+    열의 개수 7
+    기술통계 정보 요약
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+    
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mpg</th>
+      <th>cylinders</th>
+      <th>displacement</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>model-year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>398.000000</td>
+      <td>398.000000</td>
+      <td>398.000000</td>
+      <td>396.000000</td>
+      <td>398.000000</td>
+      <td>398.000000</td>
+      <td>398.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>23.514573</td>
+      <td>5.454774</td>
+      <td>193.425879</td>
+      <td>104.189394</td>
+      <td>2970.424623</td>
+      <td>15.568090</td>
+      <td>76.010050</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>7.815984</td>
+      <td>1.701004</td>
+      <td>104.269838</td>
+      <td>38.402030</td>
+      <td>846.841774</td>
+      <td>2.757689</td>
+      <td>3.697627</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>9.000000</td>
+      <td>3.000000</td>
+      <td>68.000000</td>
+      <td>46.000000</td>
+      <td>1613.000000</td>
+      <td>8.000000</td>
+      <td>70.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>17.500000</td>
+      <td>4.000000</td>
+      <td>104.250000</td>
+      <td>75.000000</td>
+      <td>2223.750000</td>
+      <td>13.825000</td>
+      <td>73.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>23.000000</td>
+      <td>4.000000</td>
+      <td>148.500000</td>
+      <td>92.000000</td>
+      <td>2803.500000</td>
+      <td>15.500000</td>
+      <td>76.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>29.000000</td>
+      <td>8.000000</td>
+      <td>262.000000</td>
+      <td>125.000000</td>
+      <td>3608.000000</td>
+      <td>17.175000</td>
+      <td>79.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>46.600000</td>
+      <td>8.000000</td>
+      <td>455.000000</td>
+      <td>230.000000</td>
+      <td>5140.000000</td>
+      <td>24.800000</td>
+      <td>82.000000</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
