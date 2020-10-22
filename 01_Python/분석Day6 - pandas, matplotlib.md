@@ -2,7 +2,7 @@
 
 # 분석Day06
 
->  pandas
+>  pandas, matplotlib
 
 ### - 교육내용
 
