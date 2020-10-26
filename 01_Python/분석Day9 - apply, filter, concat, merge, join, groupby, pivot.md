@@ -1039,5 +1039,91 @@ print(pdf3.xs(('max', 'fare', 0),
 
 ### - 실습
 
+```python
+import pandas as pd
+import seaborn as sns
+import numpy as np
 
+# matplotlib 한글 폰트 오류 문제 해결
+from matplotlib import font_manager, rc
+font_path = "data/THEdog.ttf"   #폰트파일의 위치
+font_name = font_manager.FontProperties(fname=font_path).get_name()
+rc('font', family=font_name)
+
+df = pd.read_csv('./data/product_click.log', header=None, sep=' ')
+df.columns = ['oldclicktime','clickpid']
+df['oldclicktime'] = df['oldclicktime'].astype('str')  
+df['newclicktime'] = pd.to_datetime(df['oldclicktime'], format='%Y%m%d%H%M')
+display(df.head())
+```
+
+
+```python
+# 문제 1 - 1 상품별 클릭수를 바그래프로 그리는데 클릭수가 많은 순으로 그린다.
+from matplotlib import pyplot as plt
+import seaborn as sns
+
+aggrProduct = df.groupby('clickpid').clickpid.count().sort_values(ascending=False)
+# display(aggrProduct)
+prodColors = sns.color_palette('hls', len(aggrProduct))
+aggrProduct.plot(kind='bar', color=prodColors, width=0.7, figsize=(12, 10), grid=True)
+
+plt.title('상품별 클릭 횟수', size=20)
+plt.ylabel('클릭횟수', size=17)
+plt.xlabel('상품ID', size=17)
+plt.xticks(rotation=25)
+
+plt.show()
+```
+
+
+```python
+# 문제 1 - 2 어떤 요일에 가장 많이 클릭하는지 다음과 같이 출력하시오.
+def findKorWeek(numweek) :
+    korWeek = ['월', '화', '수', '목', '금', '토', '일']
+    return korWeek[numweek]
+
+df['weekday'] = df['newclicktime'].dt.weekday.apply(findKorWeek)
+clickByWeek = df.groupby('weekday').clickpid.count().sort_values(ascending=False)
+
+print("클릭 수가 제일 많은 요일은 ", clickByWeek.head(1).index[0] + "요일입니다.", sep='')
+```
+
+
+```python
+# 문제 1 - 3 어느 시간대에 가장 많이 클릭하는지 다음과 같이 출력하시오.
+df['hour'] = df['newclicktime'].dt.hour
+clickByhour = df.groupby('hour').clickpid.count().sort_values(ascending=False)
+
+startTime = clickByhour.head(1).index[0]
+endTime = clickByhour.head(1).index[0] + 1
+
+print(startTime.astype('str'), "시와 " ,endTime.astype('str') ,"시 사이에 제일 많이 클릭했습니다.", sep='')
+```
+
+
+```python
+# 문제 2 - 1 부서별 월급의 합
+emp = pd.read_csv('./data/emp.csv', header=0)
+pd.DataFrame(emp.groupby('deptno').sal.sum())
+
+```
+
+
+```python
+# 문제 2 - 2 직무(job)별 월급의 합
+pd.DataFrame(emp.groupby('job').sal.sum())
+```
+
+
+```python
+# 문제 2 - 3 부서와 직무(job)별 최고 월급과 입사한지 가장 오래된 직원의 입사날짜
+pd.DataFrame(emp.groupby(['deptno', 'job']).agg({'sal':'sum', 'hiredate':'min'}))
+```
+
+
+```python
+# 문제 2 - 4 직무(job)와 부서별 최고 월급
+pd.DataFrame(emp.groupby(['job', 'deptno']).agg({'sal':'max'}))
+```
 
