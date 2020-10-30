@@ -6606,6 +6606,55 @@ hgtk.josa.attach('바다', hgtk.josa.EUL_REUL)
 ```
 
 
-```python
 
+### - 실습
+
+```python
+f = open('./data/naverhotel.txt', 'r', encoding='utf-8')
+textHotelComments = f.read()
+f.close()
+print(type(textHotelComments))
+display(textHotelComments)
+```
+
+
+```python
+from konlpy.tag import Okt        ## 트위터
+okt = Okt()
+nonesHotelComments = okt.nouns(textHotelComments)
+print(type(nonesHotelComments))
+print(nonesHotelComments)
+display(' '.join(nonesHotelComments))
+```
+
+
+```python
+from wordcloud import WordCloud             
+import matplotlib.pyplot as plt 
+
+stopwords = set()                                        ## 한글은 별도로 집합으로 불용어를 만든다 
+stopwords.add("호텔")
+stopwords.add("신라")
+stopwords.add("스테이")
+stopwords.add("리뷰")
+
+wordcloud = WordCloud( stopwords=stopwords,              ## 워드 클라우드 객체를 만든다 
+                        font_path = 'data/THEdog.ttf',
+                        background_color='white',        ## 배경색을 지정한다 
+                        colormap="inferno",              ## 단어 파렛트
+                        width = 700,
+                        height = 500
+)
+wordcloud_ = wordcloud.generate(' '.join(nonesHotelComments))
+wordcloud.to_file('python_hw.png')
+
+fig = plt.figure()
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.show()
+```
+
+
+```python
+WordCloud?
 ```
