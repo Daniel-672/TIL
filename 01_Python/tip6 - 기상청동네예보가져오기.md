@@ -18,7 +18,7 @@ def getweather(address):
 
     # api = 'http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtFcst?serviceKey=' #초단기예보
     api = 'http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst?serviceKey='  # 동네예보
-    key = '6TuB1szn0aNUEln7nrp6jgTQuv5WvoOgxRfPqdBtNPKTVIwbPV7SGmirrRyUIU95CP8oFZHn2f2Yr3zOWPiSdA%3D%3D'
+    key = '서비스키'
     numOfRows = '1000'
     pageNo = '1'
     base_date = today
