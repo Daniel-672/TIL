@@ -80,8 +80,8 @@
 - `git`설정 (user.name & user.email) : **최초 1회 설정**
 
   ```bash
-  $ git config --global user.name "John Kang"
-  $ git config --global user.email "hphk.john@gmail.com"
+  $ git config --global user.name "Daniel-672"
+  $ git config --global user.email "kim672772@gmail.com"
   ```
 
 
