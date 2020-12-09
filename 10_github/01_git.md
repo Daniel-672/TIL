@@ -81,7 +81,7 @@
 
   ```bash
   $ git config --global user.name "Daniel-672"
-  $ git config --global user.email "kim672772@gmail.com"
+  $ git config --global user.email "kim672772@hotmail.com"
   ```
 
 
@@ -153,6 +153,6 @@
 ```bash
 $ git clone https://github.com/zzzz/TIL.git	# 최초 repository 동기화
 # 미리 동기화 정보 등록
-$ git config --global user.email "kim672772@gmail.com"
+$ git config --global user.email "kim672772@hotmail.com"
 $ git config --global user.name "Daniel-672"
 ```

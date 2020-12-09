@@ -52,5 +52,9 @@ npm install request --save
 
 npm init -y
 npm i jquery
+
+npm run start
+
+pm2 start server.js
 ```
 
