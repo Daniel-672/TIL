@@ -1,6 +1,6 @@
-### 00_PySpark
+### 00_Python
 
-### 01_Python
+### 01_PySpark
 
 ### 02_R
 
